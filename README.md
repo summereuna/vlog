@@ -1,4 +1,4 @@
-# Wetuebe
+# Wetube
 
 - **global router**
   / -> home
