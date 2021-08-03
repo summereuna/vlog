@@ -1,4 +1,4 @@
-# Wetuebe
+# Wetube
 
 - **global router**
   / -> home
@@ -7,13 +7,17 @@
   /search -> Search
 
 - **user router**
-  /users/edit -> Edit User
-  /users/remove -> Remove User
+  /users/:id -> See User
+  /users/logout -> Log Out
+  /users/edit -> Edit MY Profile
+  /users/remove -> Remove MY Profile
 
 - **video router**
-  /videos/watch -> Watch Video
-  /videos/edit -> Edit Video
-  /videos/remove -> Remove Video
-  /videos/comments -> Comment on a Video
+  /videos/:id -> See Video
+  /videos/:id/edit -> Edit Video
+  /videos/:id/deleteVideo -> Delete Video
+  /videos/upload -> Upload Video
 
-  /videos/comments/remove -> remove a Comment of a Video
+<!--comments -> Comment on a Video
+comments/remove -> remove a Comment of a Video
+-->
