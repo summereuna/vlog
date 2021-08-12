@@ -50,12 +50,26 @@ export const postEdit = (req, res) => {
   return res.redirect(`/videos/${id}`);
 };
 
-export const search = (req, res) => res.send("search");
-export const deleteVideo = (req, res) => res.send("Delete Video");
-export const upload = (req, res) => res.send("Upload Video");
+//나중에 활성화 시키자
+//export const search = (req, res) => res.send("search");
+//export const deleteVideo = (req, res) => res.send("Delete Video");
+//export const upload = (req, res) => res.send("Upload Video");
 
-//export default 변수명;: 한 변수만 가능
-//import 변수명 from "파일 위치";
+export const getUpload = (req, res) => {
+  return res.render("upload", { pageTitle: `Upload Video` });
+};
 
-//export 변수명;: 여러 변수 익스포트 가능
-////import {변수명} from "파일 위치";
+export const postUpload = (req, res) => {
+  //여기서 비디오를 videos array에 추가할 예정
+  const { title } = req.body;
+  const newVideo = {
+    title,
+    rating: 0,
+    comments: 0,
+    createdAt: "just now",
+    views: 0,
+    id: videos.length + 1,
+  };
+  videos.push(newVideo);
+  return res.redirect("/");
+};
