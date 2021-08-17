@@ -11,7 +11,10 @@ export const watch = async (req, res) => {
   //const id = req.params.id;
   const { id } = req.params;
   const video = await Video.findById(id);
-  return res.render("watch", { pageTitle: video.title, video });
+  if (video) {
+    return res.render("watch", { pageTitle: video.title, video });
+  } //존재하지 않는 비디오 페이지로 접근할 경우 404 페이지 출력
+  return res.render("404", { pageTitle: `Video not found.` });
 };
 
 //painting the Form
