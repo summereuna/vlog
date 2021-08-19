@@ -3,7 +3,7 @@ import Video from "../models/Video";
 
 //promise
 export const home = async (req, res) => {
-  const videos = await Video.find({});
+  const videos = await Video.find({}).sort({ createdAt: "desc" });
   return res.render("home", { pageTitle: "Home", videos });
 };
 
@@ -72,5 +72,15 @@ export const deleteVideo = async (req, res) => {
   return res.redirect("/");
 };
 
-//나중에 활성화 시키자
-//export const search = (req, res) => res.send("search");
+export const search = async (req, res) => {
+  const { keyword } = req.query;
+  let videos = [];
+  if (keyword) {
+    videos = await Video.find({
+      title: {
+        $regex: new RegExp(keyword, "i"),
+      },
+    });
+  }
+  return res.render("search", { pageTitle: "Search", videos });
+};
