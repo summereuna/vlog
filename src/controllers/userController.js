@@ -60,7 +60,11 @@ export const postLogin = async (req, res) => {
       errorMessage: "Wrong password.",
     });
   }
-  console.log("👀 LOG USER IN! COMING SOON!");
+  //각 유저마다 서로 다른 req.session Object를 가지고 있으니
+  //잘 로그인 되었으면, 세션에 로그인한거 맞다고 해주고
+  req.session.loggedIn = true;
+  //세션 유저에는 DB에서 찾아온 그 user가 맞다고 알려줘서 세션에 정보 추가하기
+  req.session.user = user;
   return res.redirect("/");
 };
 
