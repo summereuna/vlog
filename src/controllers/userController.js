@@ -45,7 +45,7 @@ export const postLogin = async (req, res) => {
   const { username, password } = req.body;
   const pageTitle = "Login";
   //아에 유저 오브젝트를 가져와서 사용하자.
-  const user = await User.findOne({ username });
+  const user = await User.findOne({ username, socialOnly: false });
   //로그인에서 입력한 유저네임이 디비에 있는 유저이름이 아니면
   if (!user) {
     return res.status(400).render("login", {
@@ -129,34 +129,33 @@ export const finishGithubLogin = async (req, res) => {
     }
     //이 부분에 도착하면 유저데이터/이멜데이터 다 받은 상태
     //이제 DB에 있는 기존 user의 email이 깃헙에서 가져온 유저의 emailObj.email와 같은 user찾기
-    const existingUser = await User.findOne({ email: emailObj.email });
-    //해당 email가진 유저가 이미 있다면
-    if (existingUser) {
-      //걍 로그인 시켜주쇼 -> 세션에 로그드인 트루/유저 데이터 넣어주기 -> 그리고 나서 홈으로 보내주자
-      req.session.loggedIn = true;
-      req.session.user = existingUser;
-      return res.redirect("/");
-      //이제 깃헙으로 로그인 했음!
-    } else {
-      // DB에 같은 이메일 가진 user가 없으면, 유저의 깃헙 정보로 사이트 계정 생성할 수 있게 해주기
-      const user = await User.create({
+    let user = await User.findOne({ email: emailObj.email });
+    // DB에 같은 이메일 가진 user가 없으면, 유저의 깃헙 정보로 사이트 계정 생성할 수 있게 해주기
+    if (!user) {
+      user = await User.create({
         name: userData.name ? userData.name : "Unknown",
+        avatarUrl: userData.avatar_url,
         username: userData.login,
         email: emailObj.email,
         password: "",
         socialOnly: true,
         location: userData.location,
       });
-      req.session.loggedIn = true;
-      req.session.user = user;
-      return res.redirect("/");
     }
+    // DB에 같은 이메일 가진 user가 있으면 로그인 시켜주쇼 -> 세션에 로그드인 트루/유저 데이터 넣어주기 -> 그리고 나서 홈으로 보내주자
+    req.session.loggedIn = true;
+    req.session.user = user;
+    return res.redirect("/");
+    //이제 깃헙으로 로그인 했음!
   } else {
     return res.redirect("/login");
   }
 };
 
+export const logout = (req, res) => {
+  req.session.destroy();
+  return res.redirect("/");
+};
+
 export const edit = (req, res) => res.send("Edit User");
-export const remove = (req, res) => res.send("Remove User");
-export const logout = (req, res) => res.send("Log out");
 export const see = (req, res) => res.send("See User");
