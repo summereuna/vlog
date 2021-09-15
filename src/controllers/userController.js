@@ -1,6 +1,7 @@
 import User from "../models/User";
 import fetch from "node-fetch";
 import bcrypt from "bcrypt";
+import session from "express-session";
 
 export const getJoin = (req, res) => res.render("join", { pageTitle: "Join" });
 
@@ -163,8 +164,40 @@ export const getEdit = (req, res) => {
   });
 };
 
-export const postEdit = (req, res) => {
-  res.render("edit-profile");
+export const postEdit = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { name, email, username, location },
+  } = req;
+  //다른 사용자가 이미 유저네임/이메일 쓰고 있는지 확인하기
+  const userExists = await User.exists({
+    //$ne 오퍼레이터는
+    //{ 필드: { $ne: 값 } } //해당 값과 일치하지 않는 값을 가진 필드를 찾습니다.
+    _id: { $ne: _id },
+    $or: [{ username }, { email }],
+  });
+  //이미 사용하고 있는 사용자가 있다면, 에딧페이지에 에러메시지 띄우기
+  if (userExists) {
+    return res.status(400).render("edit-profile", {
+      pageTitle: "Edit Profile",
+      errorMessage: "This username/email is already taken.",
+    });
+  }
+  //없다면 계속 진행하여 유저 업데이트 해주기
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      name,
+      email,
+      username,
+      location,
+    },
+    { new: true }
+  );
+  req.session.user = updatedUser;
+  return res.redirect("/users/edit");
 };
 
 export const see = (req, res) => res.send("See User");
