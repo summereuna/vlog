@@ -159,7 +159,7 @@ export const logout = (req, res) => {
 };
 
 export const getEdit = (req, res) => {
-  return res.render("edit-profile", {
+  return res.render("users/edit-profile", {
     pageTitle: "Edit Profile",
   });
 };
@@ -180,7 +180,7 @@ export const postEdit = async (req, res) => {
   });
   //이미 사용하고 있는 사용자가 있다면, 에딧페이지에 에러메시지 띄우기
   if (userExists) {
-    return res.status(400).render("edit-profile", {
+    return res.status(400).render("users/edit-profile", {
       pageTitle: "Edit Profile",
       errorMessage: "This username/email is already taken.",
     });
@@ -201,7 +201,7 @@ export const postEdit = async (req, res) => {
 };
 
 export const getChangePassword = (req, res) => {
-  return res.render("change-password", { pageTitle: "Change Password" });
+  return res.render("users/change-password", { pageTitle: "Change Password" });
 };
 export const postChangePassword = (req, res) => {
   //send a notification

@@ -25,7 +25,7 @@ export const getEdit = async (req, res) => {
   if (!video) {
     return res.status(404).render("404", { pageTitle: `Video not found.` });
   }
-  return res.render("edit", { pageTitle: `Edit ${video.title}`, video });
+  return res.render("videos/edit", { pageTitle: `Edit ${video.title}`, video });
 };
 //Saving the Changes
 //video는 데이터베이스에서 검색한 영상 오브젝트
@@ -46,7 +46,7 @@ export const postEdit = async (req, res) => {
 };
 
 export const getUpload = (req, res) => {
-  return res.render("upload", { pageTitle: `Upload Video` });
+  return res.render("videos/upload", { pageTitle: `Upload Video` });
 };
 
 export const postUpload = async (req, res) => {
@@ -59,7 +59,7 @@ export const postUpload = async (req, res) => {
     });
     return res.redirect("/");
   } catch (error) {
-    return res.status(400).render("upload", {
+    return res.status(400).render("videos/upload", {
       pageTitle: "Upload Video",
       errorMessage: error._message,
     });
