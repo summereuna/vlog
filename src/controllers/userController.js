@@ -240,9 +240,13 @@ export const see = async (req, res) => {
   const { id } = req.params;
   //double populate
   const user = await User.findById(id).populate({
+    //path는 가장먼저 populate하고 싶은 것은 users.videos 어레이
     path: "videos",
+    //두 번째로 populate하고 싶은 것은 videos.owner
+    //비디오 믹신 모양때문에 creator 알아야 해서 받아와야함 ㅇㅇ!
     populate: {
       path: "owner",
+      //owner는 User 모델로 부터 온다.
       model: "User",
     },
   });
