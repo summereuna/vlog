@@ -32,9 +32,9 @@ app.use(
 //로컬미들웨어: 세션미들웨어 뒤에 나와야 세션을 받을 수 있음
 //그리고 라우터 보다는 앞에 적어야 퍼그 템플릿에서 전역변수 사용가능
 app.use(localsMiddleware);
-
-app.use("/", rootRouter);
 app.use("/uploads", express.static("uploads"));
+app.use("/static", express.static("assets"));
+app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
 
