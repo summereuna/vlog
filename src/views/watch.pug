@@ -1,17 +1,22 @@
 extends base
 
 block content
-    video(src=`/${video.fileUrl}`, controls)
-    div
-        button#play Play 
-        button#mute Mute
-        input(type="range", step="0.1", value=0.5, min="0", max="1")#volume
-        div
-            span#currentTime 00:00
-            span  / 
-            span#totalTime 00:00
-        div
-            input(type="range", step="1", value=0, min="0")#timeline
+    div#videoContainer
+        video(src=`/${video.fileUrl}`, controls)
+        div#videoControls
+            button#play Play 
+            button#mute Mute
+            input(type="range", step="0.1", value=0.5, min="0", max="1")#volume
+            div
+                span#currentTime 00:00
+                span  / 
+                span#totalTime 00:00
+            div
+                input(type="range", step="1", value=0, min="0")#timeline
+            div
+                button#fullScreen Enter Full Screen
+
+
 //-1초 씩 넘기게 stet="1", min="0"초(s) 이지만 max=비디오 길이(s) 이기 때문에 max는 html에서는 안 적어도 된다.
 
     //-
