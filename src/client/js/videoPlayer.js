@@ -107,15 +107,20 @@ const handleMouseLeave = () => {
   controlsTimeout = setTimeout(hideControls, 3000);
 };
 
+const handleExitFullscreen = () => {
+  if (!document.fullscreenElement) {
+    fullScreenIcon.classList = "fas fa-expand";
+  }
+};
+
 const handleKeyCheck = (event) => {
   let { keyCode } = event;
-  if (keyCode === 70) {
+  const fullscreen = document.fullscreenElement;
+  if (keyCode === 70 && !fullscreen) {
     videoContainer.requestFullscreen();
     fullScreenIcon.classList = "fas fa-compress";
-  } else if (keyCode === 27) {
-    document.exitFullscreen();
-    //it's not working....have to fix!!!!
-    fullScreenIcon.classList = "fas fa-expand";
+  } else if (keyCode === 27 && fullscreen) {
+    handleExitFullscreen();
   } else if (keyCode === 32) {
     handlePlayClick();
   }
@@ -131,4 +136,6 @@ videoContainer.addEventListener("mousemove", handleMouseMove);
 videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullScreen);
+document.addEventListener("keydown", handleKeyCheck);
+videoContainer.addEventListener("fullscreenchange", handleExitFullscreen);
 document.addEventListener("keydown", handleKeyCheck);
