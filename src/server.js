@@ -30,6 +30,12 @@ app.use(
   })
 );
 
+//ffmpeg 사용해 비디오 다운로드시 sharedArrayBuffer 에러 때문에 추가
+app.use((req, res, next) => {
+  res.header("Cross-Origin-Embedder-Policy", "require-corp");
+  res.header("Cross-Origin-Opener-Policy", "same-origin");
+  next();
+});
 //로컬미들웨어: 세션미들웨어 뒤에 나와야 세션을 받을 수 있음
 //그리고 라우터 보다는 앞에 적어야 퍼그 템플릿에서 전역변수 사용가능
 app.use(localsMiddleware);
