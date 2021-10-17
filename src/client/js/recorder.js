@@ -61,7 +61,7 @@ const handleDownload = async () => {
   //앵커 다운로드하는 함수
   downloadFile(mp4Url, "MyRecording.mp4");
   downloadFile(thumbnailUrl, "MyThumbnail.jpg");
-  //소스 파일 삭제
+  /*소스 파일 삭제*/
   ffmpeg.FS("unlink", files.input);
   //브라우저 느려지지 않게 다 생성하고 다운한 파일은 파일링크 해제하기
   ffmpeg.FS("unlink", files.output);
