@@ -149,12 +149,7 @@ export const createComment = async (req, res) => {
     owner: user._id,
     video: id,
   });
-  //댓글 생성 후 비디오에도 댓글 달렸다고 업데이트 해줘야 최종적으로 프론트엔드에서 비디오에 달린 댓글 가져올 수 있다.
-  //video.comments.push(새로만들어진 댓글의 id);
   video.comments.push(comment._id);
   video.save();
-  //유저도 업뎃해주기(유저한테 유저가 쓴 댓글 저장하고 싶지 않으면 안해도 됨ㅇㅇ)
-  user.comments.push(comment._id);
-  user.save();
   return res.sendStatus(201);
 };
