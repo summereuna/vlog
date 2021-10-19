@@ -12,15 +12,12 @@ const addComment = (text, id) => {
   icon.className = "fas fa-comment";
   const span = document.createElement("span");
   span.innerText = ` ${text}`;
-  const divDelete = document.createElement("div");
-  const spanDelete = document.createElement("span");
-  spanDelete.innerText = `❌`;
-  divDelete.className = "video__comment-deleteBtn";
+  const iconDelete = document.createElement("i");
+  iconDelete.className = "fas fa-trash-alt";
   divContent.appendChild(icon);
   divContent.appendChild(span);
-  divDelete.appendChild(spanDelete);
   newComment.appendChild(divContent);
-  newComment.appendChild(divDelete);
+  newComment.appendChild(iconDelete);
   videoComments.prepend(newComment);
 };
 
