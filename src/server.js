@@ -20,6 +20,8 @@ app.set("views", process.cwd() + "/src/views");
 app.use(logger);
 //express application이 form의 value들을 이해할 수 있게 하고 JS로 변형시켜줌
 app.use(express.urlencoded({ extended: true }));
+//fetch로 부터 오는 데이터를 서버가 이해하게 하는 미들웨어인데 string 받아서 json으로 바꿔줌
+app.use(express.json());
 
 //ffmpeg 사용해 비디오 다운로드시 sharedArrayBuffer 에러 때문에 추가
 app.use((req, res, next) => {
