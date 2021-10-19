@@ -1,6 +1,8 @@
 import { Model } from "mongoose";
 import Video from "../models/Video";
+import Comment from "../models/Comment";
 import User from "../models/User";
+import { async } from "regenerator-runtime";
 
 //promise
 export const home = async (req, res) => {
@@ -132,8 +134,23 @@ export const registerView = async (req, res) => {
 };
 
 //댓글
-export const createComment = (req, res) => {
-  console.log(req.params);
-  console.log(req.body);
-  return res.end();
+export const createComment = async (req, res) => {
+  const {
+    session: { user },
+    body: { text },
+    params: { id },
+  } = req;
+
+  const video = await Video.findById(id);
+  if (!video) {
+    //비디오 없으면 404코드 보내고 코드 끝냄
+    return res.sendStatus(404);
+  }
+  //코멘트 생성
+  const comment = await Comment.create({
+    text,
+    owner: user._id,
+    vidoe: id,
+  });
+  return res.sendStatus(201);
 };
