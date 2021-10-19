@@ -13,9 +13,9 @@ export const home = async (req, res) => {
 };
 
 export const watch = async (req, res) => {
-  //const id = req.params.id;
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner");
+  const video = await Video.findById(id).populate("owner").populate("comments");
+  console.log(video);
   if (!video) {
     return res.status(404).render("404", { pageTitle: `Video not found.` });
   }
@@ -140,17 +140,21 @@ export const createComment = async (req, res) => {
     body: { text },
     params: { id },
   } = req;
-
   const video = await Video.findById(id);
   if (!video) {
-    //비디오 없으면 404코드 보내고 코드 끝냄
     return res.sendStatus(404);
   }
-  //코멘트 생성
   const comment = await Comment.create({
     text,
     owner: user._id,
-    vidoe: id,
+    video: id,
   });
+  //댓글 생성 후 비디오에도 댓글 달렸다고 업데이트 해줘야 최종적으로 프론트엔드에서 비디오에 달린 댓글 가져올 수 있다.
+  //video.comments.push(새로만들어진 댓글의 id);
+  video.comments.push(comment._id);
+  video.save();
+  //유저도 업뎃해주기(유저한테 유저가 쓴 댓글 저장하고 싶지 않으면 안해도 됨ㅇㅇ)
+  user.comments.push(comment._id);
+  user.save();
   return res.sendStatus(201);
 };
