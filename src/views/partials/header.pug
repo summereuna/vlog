@@ -1,14 +1,21 @@
 header
-    a(href="/").header__logo
-        i.fab.fa-youtube
+    div.header__icons
+        i.fas.fa-bars
+        a(href="/").header__logo
+            span Vl
+            i.far.fa-smile
+            span g
+    div.header__search
+        form(action="/serch")
+            input(type="text" placeholder="검색") 
+        a(href="/search")
+            i.fas.fa-search
     nav
         ul
-            li
-                a(href="/search")
-                    i.fas.fa-search
             if loggedIn
                 li
-                    a(href="/videos/upload") Upload Video
+                    a(href="/videos/upload")
+                        <i class="fas fa-video"></i>
                 li
                     a(href="/users/edit") Edit Profile
                 li

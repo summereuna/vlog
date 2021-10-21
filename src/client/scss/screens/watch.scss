@@ -19,7 +19,6 @@
     font-size: 14px;
     a {
       color: cornflowerblue;
-      text-decoration: underline;
     }
   }
 }
@@ -33,8 +32,8 @@
   margin-top: 20px;
   .video__comment {
     padding: 10px;
-    background-color: white;
-    color: black;
+    background-color: $bg;
+    color: $color;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;

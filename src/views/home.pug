@@ -2,7 +2,30 @@ extends base
 include mixins/video
 
 block content
-    div.video-grid
+    ul.home__nav
+        li.home__nav-list
+            i.fas.fa-home
+            span 홈
+        li.home__nav-list
+            i.far.fa-compass
+            span 탐색
+        li.home__nav-list
+            i.fas.fa-newspaper
+            span 구독
+        li.home__nav-list
+            i.far.fa-play-circle
+            span Music
+        li.home__nav-list
+            i.fas.fa-inbox
+            span 보관함
+    div.home__tags
+        span 전체
+        span 음악
+        span 믹스
+        span 실시간
+        span 뷰티 팁
+        span 애니메이션
+    div.video-grid.home__main
         each video in videos
             +video(video)
         else
