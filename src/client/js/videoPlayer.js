@@ -123,6 +123,12 @@ const handleKeyCheck = (event) => {
     handleExitFullscreen();
   } else if (keyCode === 32) {
     handlePlayClick();
+  } else if (keyCode === 77) {
+    handleMute();
+  } else if (keyCode === 37) {
+    video.currentTime -= 5;
+  } else if (keyCode === 39) {
+    video.currentTime += 5;
   }
 };
 
@@ -146,4 +152,3 @@ timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullScreen);
 document.addEventListener("keydown", handleKeyCheck);
 videoContainer.addEventListener("fullscreenchange", handleExitFullscreen);
-document.addEventListener("keydown", handleKeyCheck);

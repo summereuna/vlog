@@ -1,41 +1,44 @@
-.video__data {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  .video__title {
-    font-size: 26px;
-    margin-bottom: 5px;
-  }
-  .video__description {
-    font-size: 15px;
-    margin: 15px 0;
-  }
+.video__watch {
+  margin: 25px;
+  .video__data {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    .video__title {
+      font-size: 26px;
+      margin-bottom: 5px;
+    }
+    .video__description {
+      font-size: 15px;
+      margin: 15px 0;
+    }
 
-  .video__createdAt {
-    font-size: 12px;
-  }
-  .video__owner {
-    margin-bottom: 5px;
-    font-size: 14px;
-    a {
-      color: cornflowerblue;
+    .video__createdAt {
+      font-size: 12px;
+    }
+    .video__owner {
+      margin-bottom: 5px;
+      font-size: 14px;
+      a {
+        color: cornflowerblue;
+      }
     }
   }
-}
 
-.video__comments {
-  display: flex;
-  flex-direction: column;
-  max-width: 320px;
-  width: 100%;
-  margin: 0 auto;
-  margin-top: 20px;
-  .video__comment {
-    padding: 10px;
-    background-color: $bg;
-    color: $color;
-    margin-bottom: 10px;
+  .video__comments {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    max-width: 320px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    .video__comment {
+      padding: 10px;
+      background-color: $bg;
+      color: $color;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
