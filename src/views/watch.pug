@@ -1,57 +1,95 @@
 extends base
+include mixins/video-aside
 
 block content
     section.video__watch
-        article#videoContainer(data-id=video._id)
-            video(src=`/${video.fileUrl}`)
-            div#videoControls.videoControls
-                input.videoControls__range(type="range",step="1", value="0", min="0")#timeline
-                div.videoControls__btn
-                    div.videoControls__btn-main
-                        div.videoControls__play
-                            span#play.videoControls__playBtn
-                                i.fas.fa-play
-                        div.videoControls__volume
-                            span#mute
-                                i.fas.fa-volume-up
-                            input(type="range",step="0.1", value=0.5, min="0", max="1")#volume
-                        div.videoControls__time
-                            span#currentTime 00:00
-                            span  / 
-                            span#totalTime 00:00
-                    div.videoControls__btn-sub
-                        span#fullScreen
-                            i.fas.fa-expand
-
-        article.video__data
-            h1.video__title=video.title
-            section.video__info-video
-                p 조회수 #{video.meta.views} • 
-                p.video__createdAt=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
-            section.video__info-owner
-                div.video__owner-image
-                    img(src=`/${video.owner.avatarUrl}`, alt="avatar", width="50", height="50")
-                small.video__owner
-                    a(href=`/users/${video.owner._id}`) #{video.owner.name}
-            if String(video.owner._id) === loggedInUser._id
-                a(href=`${video.id}/edit`) Edit Video &rarr;
-                br
-                a(href=`${video.id}/delete`) Delete Video &rarr;
-        if loggedIn
-            div.video__add-comments
-                form.video__comments-form#commentForm
-                    textarea(cols="30", rows="10", placeholder="Write a comment...")
-                    button Add Comment
-        article.video__comments-section
-        div.video__comments
-            ul
-                each comment in video.comments.reverse()
-                    li.video__comment(data-id=comment._id)
-                        div.video__comment-content
-                            i.fas.fa-comment
-                            span  #{comment.text}
-                        if String(comment.owner._id) === loggedInUser._id
-                            i.video__comment-delete.fas.fa-trash-alt
+        section.video__watch-video
+            article#videoContainer(data-id=video._id)
+                video(src=`/${video.fileUrl}`)
+                div#videoControls.videoControls
+                    input.videoControls__range(type="range",step="1", value="0", min="0")#timeline
+                    div.videoControls__btn
+                        div.videoControls__btn-main
+                            div.videoControls__play
+                                span#play.videoControls__playBtn
+                                    i.fas.fa-play
+                            div.videoControls__volume
+                                span#mute
+                                    i.fas.fa-volume-up
+                                input(type="range",step="0.1", value=0.5, min="0", max="1")#volume
+                            div.videoControls__time
+                                span#currentTime 00:00
+                                span  / 
+                                span#totalTime 00:00
+                        div.videoControls__btn-sub
+                            span#fullScreen
+                                i.fas.fa-expand
+            article.video__data
+                p.video__data__hashtags=video.hashtags
+                h1.video__data__title=video.title
+                section.video__data__info
+                    div.video__data__info-meta
+                        p 조회수 #{video.meta.views} •  
+                        p.video__createdAt=new Date(video.createdAt).toLocaleDateString({ year: 'numeric', month: 'long', day: 'numeric'})
+                    div.video__data__info-btns
+                        div.video__data__info-btn
+                            i.far.fa-thumbs-up
+                            span 2
+                        div.video__data__info-btn
+                            i.far.fa-thumbs-down
+                            span 0
+                        div.video__data__info-btn
+                            i.far.fa-share-square
+                            span 공유
+                        div.video__data__info-btn
+                            i.far.fa-share-square
+                            span 저장
+                        i.fas.fa-ellipsis-h
+            article.video__data-detail
+                div.video__data-detail__owner
+                    div.video__data-detail__owner-info
+                        div.video__owner-image
+                            img(src=`/${video.owner.avatarUrl}`, alt="avatar", width="50", height="50")
+                        div.video__owner-info
+                            p.video__owner
+                                a(href=`/users/${video.owner._id}`) #{video.owner.name}
+                            small 구독자 0명
+                    div.video__data-detail__owner-subscription 구독
+                h2.video__data-detail__description #{video.description}
+                    if String(video.owner._id) === loggedInUser._id
+                        a(href=`${video.id}/edit`) Edit Video &rarr;
+                        br
+                        a(href=`${video.id}/delete`) Delete Video &rarr;
+            article.video__comments-section
+                div.video__comments-info
+                    h3 댓글 #{video.comments.length}개
+                    if loggedIn
+                        div.video__comments-add
+                            div.video__comments-add__user
+                                img.header__avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin)
+                            div.video__comments-add__comment
+                                form.video__comments-add__comment-form#commentForm
+                                    input(placeholder="공개 댓글 추가...")
+                                    button 댓글
+                div.video__comments-list
+                    ul
+                        each comment in video.comments.reverse()
+                            li.video__comment(data-id=comment._id)
+                                div.video__comment-content
+                                    div.video__comment-content__user-avatar
+                                        img.header__avatar(src=`/${comment.owner.avatarUrl}`, crossorigin)
+                                    div.video__comment-content__main
+                                        div.video__comment-content__main-info
+                                            h4 comment.owner.username
+                                            span=new Date(comment.createdAt).toLocaleDateString({ year: 'numeric', month: 'long', day: 'numeric'})
+                                        span #{comment.text}
+                                    if String(comment.owner._id) === loggedInUser._id
+                                        i.video__comment-delete.fas.fa-trash-alt
+        aside.video__watch-aside
+            each video in videos
+                +video(video)
+            else
+                span.empty__message No videos found.
 
 block scripts
     script(src="/static/js/videoPlayer.js")

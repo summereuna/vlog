@@ -1,0 +1,35 @@
+//video mixins
+.video-aside-mixin {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  .video-aside-mixin__thumb {
+    margin-right: 10px;
+    width: 168px;
+    height: 94px;
+  }
+  .video-aside-mixin__data {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .video-aside-mixin__info {
+      .video-aside-mixin__title {
+        font-size: 15px;
+        font-weight: 800;
+        color: $color;
+        font-weight: 500;
+        display: block;
+        margin-top: 5px;
+        margin-bottom: 10px;
+      }
+      .video-aside-mixin__meta {
+        font-size: 12px;
+        color: $sub-color;
+        p {
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}

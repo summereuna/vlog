@@ -139,6 +139,8 @@ const handleEnded = () => {
   });
 };
 
+video.play();
+
 //이벤트 리스너
 playBtn.addEventListener("click", handlePlayClick);
 muteBtn.addEventListener("click", handleMute);
