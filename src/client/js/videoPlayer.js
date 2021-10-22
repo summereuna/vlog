@@ -13,6 +13,8 @@ const fullScreenBtn = document.getElementById("fullScreen");
 const fullScreenIcon = fullScreenBtn.querySelector("i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
+const inputSearch = document.querySelector("#input-search");
+const inputComment = document.querySelector("#input-comment");
 
 //전역변수 설정
 let controlsTimeout = null;
@@ -124,14 +126,34 @@ const handleKeyCheck = (event) => {
   } else if (keyCode === 27 && fullscreen) {
     handleExitFullscreen();
   } else if (keyCode === 32) {
+    event.preventDefault();
     handlePlayClick();
   } else if (keyCode === 77) {
     handleMute();
   } else if (keyCode === 37) {
+    event.preventDefault();
     video.currentTime -= 5;
   } else if (keyCode === 39) {
+    event.preventDefault();
     video.currentTime += 5;
   }
+};
+
+const handleAddKeyCheck = (event) => {
+  event.target.style.background = "";
+  inputComment.removeEventListener("focus", handleRemoveKeyCheck);
+  inputSearch.removeEventListener("focus", handleRemoveKeyCheck);
+  document.addEventListener("keydown", handleKeyCheck);
+  inputComment.addEventListener("focus", handleRemoveKeyCheck);
+  inputSearch.addEventListener("focus", handleRemoveKeyCheck);
+};
+
+const handleRemoveKeyCheck = (event) => {
+  console.dir("event.target");
+  event.target.style.background = "pink";
+  document.removeEventListener("keydown", handleKeyCheck);
+  inputComment.addEventListener("blur", handleAddKeyCheck);
+  inputSearch.addEventListener("blur", handleAddKeyCheck);
 };
 
 const handleEnded = () => {
@@ -142,8 +164,9 @@ const handleEnded = () => {
 };
 
 const init = () => {
-  video.play();
-  playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
+  if (video.played) {
+    playBtnIcon.classList = "fas fa-pause";
+  }
 };
 
 init();
@@ -160,4 +183,7 @@ videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullScreen);
 document.addEventListener("keydown", handleKeyCheck);
+inputComment.addEventListener("focus", handleRemoveKeyCheck);
+inputSearch.addEventListener("focus", handleRemoveKeyCheck);
 videoContainer.addEventListener("fullscreenchange", handleExitFullscreen);
+video.addEventListener("click", handlePlayClick);

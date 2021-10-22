@@ -5,7 +5,7 @@ block content
     section.video__watch
         section.video__watch-video
             article#videoContainer(data-id=video._id)
-                video(src=`/${video.fileUrl}`)
+                video(src=`/${video.fileUrl}`, autoplay="true")
                 div#videoControls.videoControls
                     input.videoControls__range(type="range",step="1", value="0", min="0")#timeline
                     div.videoControls__btn
@@ -69,7 +69,7 @@ block content
                                 img.header__avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin)
                             div.video__comments-add__comment
                                 form.video__comments-add__comment-form#commentForm
-                                    input(placeholder="공개 댓글 추가...")
+                                    input#input-comment(placeholder="공개 댓글 추가...")
                                     button 댓글
                 div.video__comments-list
                     ul
