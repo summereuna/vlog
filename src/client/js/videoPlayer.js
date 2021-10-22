@@ -48,7 +48,9 @@ const handleVolumeChange = (event) => {
   } = event;
   if (video.muted) {
     video.muted = false;
-    muteBtn.innerText = "Mute";
+    muteBtnIcon.classList = video.muted
+      ? "fas fa-volume-mute"
+      : "fas fa-volume-up";
   }
   volumeValue = value;
   video.volume = value;
@@ -139,7 +141,12 @@ const handleEnded = () => {
   });
 };
 
-video.play();
+const init = () => {
+  video.play();
+  playBtnIcon.classList = video.paused ? "fas fa-play" : "fas fa-pause";
+};
+
+init();
 
 //이벤트 리스너
 playBtn.addEventListener("click", handlePlayClick);

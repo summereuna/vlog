@@ -5,6 +5,10 @@ mixin video(video)
             section.video-aside-mixin__data
                 div.video-aside-mixin__info
                     span.video-aside-mixin__title=video.title
+                    div.videoControls__time
+                                span#currentTime 00:00
+                                span  / 
+                                span#totalTime 00:00
                     div.video-aside-mixin__meta
                         p.video-aside-mixin__owner=video.owner.name
                             //-a(href=`/users/${video.owner._id}`) #{video.owner.name}
