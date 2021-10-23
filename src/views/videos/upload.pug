@@ -1,21 +1,23 @@
 extends ../base
 
 block content
-    div.upload__container
-        div.upload__video
-            video#preview
-            button#actionBtn.social__btn Start Recording
-        if errorMessage
-            span=errorMessage
-        form(method="POST", enctype="multipart/form-data")
-            label(for="video") Video File
-            input(type="file", accept="video/*", required, id="video", name="video")
-            label(for="thumbnail") Thumbnail File
-            input(type="file", accept="image/*", required, id="thumbnail", name="thumbnail")
-            input(name="title", placeholder="Title", required, type="text", maxlength=80)
-            input(name="description", placeholder="Description", required, type="text", minlength=5)
-            input(name="hashtags", placeholder="#Hashtags, seperated by comma.", required, type="text")
-            input(type="submit", value="Upload Video")
+    include ../partials/sidenav
+    section.profile.upload-section
+        div.upload__container
+            div.upload__video
+                video#preview
+                button.form__input-submit-record#actionBtn.social__btn 녹화 시작
+                if errorMessage
+                    span.errorMessage=errorMessage
+            form.form(method="POST", enctype="multipart/form-data")
+                label.form__label(for="video") 동영상
+                    input.form__input-file(type="file", accept="video/*", required, id="video", name="video")
+                label.form__label(for="thumbnail") 동영상 썸네일
+                    input.form__input-file(type="file", accept="image/*", required, id="thumbnail", name="thumbnail")
+                input.form__input(name="title", placeholder="제목*", required, type="text", maxlength=80)
+                input.form__input(name="description", placeholder="설명*", required, type="text", minlength=5)
+                input.form__input(name="hashtags", placeholder=`#해시태그는 ","로 구분하여 입력하세요.`, required, type="text")
+                input.form__input-submit-point.edit-profile__submit(type="submit", value="동영상 업로드하기")
             
 block scripts
     script(src="/static/js/recorder.js")

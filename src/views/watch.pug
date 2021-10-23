@@ -54,12 +54,13 @@ block content
                             p.video__owner
                                 a(href=`/users/${video.owner._id}`) #{video.owner.name}
                             small 구독자 0명
-                    div.video__data-detail__owner-subscription 구독
-                h2.video__data-detail__description #{video.description}
                     if String(video.owner._id) === loggedInUser._id
-                        a(href=`${video.id}/edit`) Edit Video &rarr;
-                        br
-                        a(href=`${video.id}/delete`) Delete Video &rarr;
+                    div.video__editContainer
+                        a(href=`${video.id}/edit`)
+                            button.form__input-submit.margin-left 수정
+                        a(href=`${video.id}/delete`)
+                            button.form__input-submit.margin-left 삭제
+                h2.video__data-detail__description #{video.description}
             article.video__comments-section
                 div.video__comments-info
                     h3 댓글 #{video.comments.length}개

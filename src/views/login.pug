@@ -5,9 +5,11 @@ block content
         article.article
             div.article__title
                 h1.article__main-title 로그인
-                h2.article__sub-title Wetube로 이동
-        if errorMessage
-            span=errorMessage
+                h2.article__sub-title 
+                    span Vl☻g
+                    small.article__sub-title 로 이동
+                if errorMessage
+                    span.errorMessage=errorMessage
         form.form(method="POST")
             input.form__input(name="username", type="text", placeholder="아이디", required)
             input.form__input(name="password", type="password", placeholder="비밀번호", required)

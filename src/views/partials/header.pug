@@ -5,22 +5,24 @@ header.flex-container
             span Vl☻g
     div.header__search.flex2
         form(action="/search" method="GET").search__form
-            input(name="keyword", type="text", placeholder="검색")
+            input#input-search(name="keyword", type="text", placeholder="제목으로 검색")
             button
                 i.fas.fa-search
     nav.flex3
         ul
             if loggedIn
                 li
+                    a(href="/users/logout")
+                        button.header__btn-logout 로그아웃
+                li
                     a(href="/videos/upload")
                         <i class="fas fa-video"></i>
                 li
-                    a(href="/users/logout")
-                        button.header__btn-log 로그아웃
-                li
                     a(href=`/users/${loggedInUser._id}`) 
                         if loggedInUser.avatartUrl === ""
-                            span 😃
+                            i.fas.fa-user
+                        else if loggedInUser.avatartUrl === undefined
+                            i.fas.fa-user
                         else
                             img.header__avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin)
             else
@@ -29,4 +31,4 @@ header.flex-container
                         button.header__btn-log 로그인
                 li
                     a(href="/join")
-                        button.header__btn 가입
+                        button.header__btn 회원가입

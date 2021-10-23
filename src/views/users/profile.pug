@@ -6,26 +6,42 @@ block content
     include ../partials/sidenav
     section.profile
         article.profile__user
-            img(src=`/${user.avatarUrl}`).avatar
+            section
+                if String(user.avatartUrl)
+                    img(src=`/${user.avatarUrl}`, crossorigin).avatar
+                else if user.avatartUrl === undefined
+                    div.avatar
+                        i.fas.fa-user
+                else if user.avatartUrl ===  ""
+                    div.avatar
+                        i.fas.fa-user
             section.profile__user-info
                 h1=user.name
-                if loggedIn
+                if String(user._id) === loggedInUser._id
                     a(href="/users/edit")
-                        h3 Edit Profile
+                        button.form__input-submit 프로필 수정
         article.profile__data
             section.profile__data-videos
-                h2 내 비디오 
-                    span #{user.videos.length}개
+                div.profile__section-title
+                    h2 동영상
+                        span #{user.videos.length}개
                 div
                     each video in user.videos
                         +video(video)
                     else
-                        span.empty__message 동영상을 업로드해보세요. 업로드한 동영상이 여기에 표시됩니다.
+                        if String(user._id) === loggedInUser._id
+                            span.empty__message 동영상을 업로드해보세요. 내가 업로드한 동영상이 여기에 표시됩니다.
+                        else
+                            span.empty__message 업로드한 동영상이 없습니다.
             section.profile__data-comments
-                h2 내 댓글
-                    span #{user.comments.length} 개
+                div.profile__section-title
+                    h2 댓글
+                        span #{user.comments.length} 개
                 ul
                     each comment in user.comments
                         +comment(comment)
-                    else
-                        span.empty__message 동영상에 댓글을 달고 소통해보세요. 내가 단 댓글이 여기에 표시됩니다.
+                    else 
+                        if String(user._id) === loggedInUser._id
+                            span.empty__message 동영상에 댓글을 달고 소통해보세요. 내가 단 댓글이 여기에 표시됩니다.
+                        else
+                            span.empty__message 댓글이 없습니다.

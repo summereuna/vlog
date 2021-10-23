@@ -5,9 +5,10 @@ block content
         article.article
             div.article__title
                 h1.article__main-title 회원가입
-                h2.article__sub-title 환영합니다!
-        if errorMessage
-            span=errorMessage
+                h2.article__sub-title 공유하고 싶은 일상 그 순간,
+                    span  Vl☻g
+                if errorMessage
+                    span.errorMessage=errorMessage
         form.form(method="POST")
             input.form__input(name="name", type="text", placeholder="이름*", required)
             input.form__input(name="email", type="email", placeholder="이메일*", required)
