@@ -1,16 +1,25 @@
 extends ../base
 
 block content
+    include ../partials/sidenav
     if errorMessage
         span=errorMessage
-    form(method="POST", enctype="multipart/form-data").edit-profile__form
-        label(for="avatar") Avatar 
-        input(type="file", id="avatar", name="avatar", accept="image/*")
-        input(name="name", type="text", placeholder="Name", required, value=loggedInUser.name)
-        input(name="email", type="email", placeholder="Email", required, value=loggedInUser.email)
-        input(name="username", type="text", placeholder="Username", required, value=loggedInUser.username)
-        input(name="location", type="text", placeholder="Location", value=loggedInUser.location)
-        input(type="submit", value="Update Profile")
-        if !loggedInUser.socialOnly
-            div.edit-profile__password
-                a(href="change-password") Change Password &rarr;
+    section.profile
+        article.profile__user
+            img(src=`/${loggedInUser.avatarUrl}`).avatar
+            section.profile__user-info
+                h1=loggedInUser.name
+        article.profile__data
+            section.profile__data-videos
+                h2 프로필 수정
+                form.form(method="POST", enctype="multipart/form-data").edit-profile__form
+                    label.form__label(for="avatar") 프로필 사진
+                        input.form__input-file(type="file", id="avatar", name="avatar", accept="image/*")
+                    input.form__input(name="name", type="text", placeholder="이름", required, value=loggedInUser.name)
+                    input.form__input(name="email", type="email", placeholder="이메일", required, value=loggedInUser.email)
+                    input.form__input(name="username", type="text", placeholder="아이디", required, value=loggedInUser.username)
+                    input.form__input(name="location", type="text", placeholder="위치", value=loggedInUser.location)
+                    input.form__input-submit(type="submit", value="프로필 수정")
+                if !loggedInUser.socialOnly
+                    a(href="change-password")
+                        button.edit-profile__password.form__input-submit-bg 비밀번호 변경

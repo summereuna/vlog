@@ -1,17 +1,23 @@
 extends base
 
 block content
-    if errorMessage
-        span=errorMessage
-    form(method="POST")
-        input(name="name", type="text", placeholder="Name", required)
-        input(name="email", type="email", placeholder="Email", required)
-        input(name="username", type="text", placeholder="Username", required)
-        input(name="password", type="password", placeholder="Password", required)
-        input(name="password2", type="password", placeholder="Confirm Password", required)
-        input(name="location", type="text", placeholder="Location")
-        input(type="submit", value="Join")
-        include partials/social-login
-    div.auth-switch
-        span Already have an account? 
-        a(href="/login") Log in now &rarr;
+    section.section
+        article.article
+            div.article__title
+                h1.article__main-title 회원가입
+                h2.article__sub-title 환영합니다!
+        if errorMessage
+            span=errorMessage
+        form.form(method="POST")
+            input.form__input(name="name", type="text", placeholder="이름*", required)
+            input.form__input(name="email", type="email", placeholder="이메일*", required)
+            input.form__input(name="username", type="text", placeholder="아이디*", required)
+            input.form__input(name="password", type="password", placeholder="비밀번호*", required)
+            input.form__input(name="password2", type="password", placeholder="비밀번호 재입력*", required)
+            input.form__input(name="location", type="text", placeholder="위치")
+            input.form__input-submit-point(type="submit", value="가입")
+        div.auth-switch
+            span 이미 계정이 있나요?
+            a(href="/login")
+                button.form__input-submit-bg 로그인
+            include partials/social-login

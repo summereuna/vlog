@@ -1,0 +1,5 @@
+mixin comment(comment)
+     li
+        a(href=`/videos/${comment.video._id}`)
+            h3=comment.text
+            p=new Date(comment.createdAt).toLocaleDateString({ year: 'numeric', month: 'long', day: 'numeric'})

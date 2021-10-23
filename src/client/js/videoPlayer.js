@@ -139,8 +139,7 @@ const handleKeyCheck = (event) => {
   }
 };
 
-const handleAddKeyCheck = (event) => {
-  event.target.style.background = "";
+const handleAddKeyCheck = () => {
   inputComment.removeEventListener("focus", handleRemoveKeyCheck);
   inputSearch.removeEventListener("focus", handleRemoveKeyCheck);
   document.addEventListener("keydown", handleKeyCheck);
@@ -148,9 +147,7 @@ const handleAddKeyCheck = (event) => {
   inputSearch.addEventListener("focus", handleRemoveKeyCheck);
 };
 
-const handleRemoveKeyCheck = (event) => {
-  console.dir("event.target");
-  event.target.style.background = "pink";
+const handleRemoveKeyCheck = () => {
   document.removeEventListener("keydown", handleKeyCheck);
   inputComment.addEventListener("blur", handleAddKeyCheck);
   inputSearch.addEventListener("blur", handleAddKeyCheck);

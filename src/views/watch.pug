@@ -80,7 +80,7 @@ block content
                                         img.header__avatar(src=`/${comment.owner.avatarUrl}`, crossorigin)
                                     div.video__comment-content__main
                                         div.video__comment-content__main-info
-                                            h4 comment.owner.username
+                                            h4=comment.owner
                                             span=new Date(comment.createdAt).toLocaleDateString({ year: 'numeric', month: 'long', day: 'numeric'})
                                         span #{comment.text}
                                     if String(comment.owner._id) === loggedInUser._id

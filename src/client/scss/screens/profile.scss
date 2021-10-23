@@ -1,14 +1,128 @@
-.profile__data {
-  max-width: 420px;
-  margin: 0 auto;
+.profile {
+  margin-left: 70px;
+  padding: 0 57px;
+  background-color: $sub-bg;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  font-size: 30px;
-  img {
-    margin-bottom: 10px;
+  .profile__user {
+    height: 150;
+    padding: 16px 57px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 30px;
+    img {
+      margin-bottom: 10px;
+      width: 80px;
+      height: 80px;
+      margin-right: 15px;
+    }
+    .profile__user-info {
+      h1 {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+      h3 {
+        font-size: 13px;
+        font-weight: 400;
+        color: $link;
+      }
+    }
   }
-  h3 {
-    font-size: 18px;
+  .profile__data {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 auto;
+    padding: 20px;
+    .profile__data-videos {
+      padding: 30px;
+      background-color: #f1f1f1;
+      min-width: 550px;
+      display: flex;
+      flex-direction: column;
+      h2 {
+        font-size: 18px;
+        font-weight: 600;
+        padding: 5px 0 25px 2px;
+        span {
+          margin-left: 5px;
+          font-weight: 400;
+          color: $sub-color;
+        }
+        small {
+          margin-left: 10px;
+          font-weight: 400;
+          font-size: 12px;
+          span {
+            color: red;
+          }
+        }
+      }
+      article {
+        padding: 20px;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        padding-bottom: 20px;
+        transition: background-color 0.2s ease-in-out;
+        div:nth-child(1) {
+          margin-right: 20px;
+          width: 230px;
+          height: 130px;
+        }
+      }
+      article:hover {
+        background-color: $main-border-color;
+      }
+      div {
+        display: flex;
+        flex-direction: column;
+        .video-mixin__avatar {
+          display: none;
+        }
+        .video-mixin__info {
+          .video-mixin__title {
+          }
+        }
+      }
+    }
+    .profile__data-comments {
+      padding: 30px;
+      background-color: #f1f1f1;
+      min-width: 550px;
+      margin: 0 auto;
+      h2 {
+        font-size: 18px;
+        font-weight: 600;
+        padding: 5px 0 25px 2px;
+        span {
+          margin-left: 5px;
+          font-weight: 400;
+          color: $sub-color;
+        }
+      }
+      li {
+        padding: 30px 10px;
+        border-bottom: 1px solid #d8d8d8;
+        overflow: auto;
+        transition: background-color 0.2s ease-in-out;
+        h3 {
+          font-size: 15px;
+          margin-bottom: 5px;
+        }
+        p {
+          padding-top: 10px;
+          font-size: 12px;
+          color: $sub-color;
+        }
+      }
+      li:hover {
+        background-color: $main-border-color;
+      }
+    }
   }
 }

@@ -1,0 +1,27 @@
+.home__nav {
+  top: 58px;
+  position: fixed;
+  width: 70px;
+  height: 100%;
+  padding-bottom: 100%;
+  display: block;
+  background-color: $bg;
+  .home__nav-list {
+    height: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s ease-in-out;
+    span {
+      margin-top: 5px;
+      font-size: 12px;
+    }
+    i {
+      font-size: 20px;
+    }
+  }
+  :hover {
+    background-color: $hover-color;
+  }
+}

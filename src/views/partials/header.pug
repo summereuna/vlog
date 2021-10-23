@@ -1,25 +1,22 @@
-header
-    div.header__icons
+header.flex-container
+    div.header__icons.flex1
         i.fas.fa-bars
         a(href="/").header__logo
-            span Vl
-            i.far.fa-smile
-            span g
-    div.header__search
-        form(action="/serch")
-            input#input-search(type="text" placeholder="검색") 
-        a(href="/search")
-            i.fas.fa-search
-    nav
+            span Vl☻g
+    div.header__search.flex2
+        form(action="/search" method="GET").search__form
+            input(name="keyword", type="text", placeholder="검색")
+            button
+                i.fas.fa-search
+    nav.flex3
         ul
             if loggedIn
                 li
                     a(href="/videos/upload")
                         <i class="fas fa-video"></i>
                 li
-                    a(href="/users/edit") Edit Profile
-                li
-                    a(href="/users/logout") Log out
+                    a(href="/users/logout")
+                        button.header__btn-log 로그아웃
                 li
                     a(href=`/users/${loggedInUser._id}`) 
                         if loggedInUser.avatartUrl === ""
@@ -28,6 +25,8 @@ header
                             img.header__avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin)
             else
                 li
-                    a(href="/login") Login
+                    a(href="/login")
+                        button.header__btn-log 로그인
                 li
-                    a(href="/join").header__btn Join
+                    a(href="/join")
+                        button.header__btn 가입

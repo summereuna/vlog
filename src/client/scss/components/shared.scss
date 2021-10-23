@@ -10,10 +10,14 @@
 }
 
 .auth-switch {
+  font-size: 14px;
+  width: 400px;
+  background-color: $bg;
   text-align: center;
-  margin-top: 40px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  margin-bottom: 20px;
   a {
-    text-decoration: underline;
     cursor: pointer;
   }
 }

@@ -8,9 +8,9 @@
 @import "./components/video.scss";
 @import "./components/shared.scss";
 @import "./components/forms.scss";
-@import "./components/social-login.scss";
 @import "./components/video-player.scss";
 @import "./components/video-aside.scss";
+@import "./components/side-nav.scss";
 
 //3. Screens
 @import "./screens/home.scss";
@@ -46,6 +46,7 @@ main {
   max-width: auto;
   width: 100%;
   margin: 0;
+  padding-top: 58px;
 }
 
 @keyframes goAway {
@@ -83,4 +84,8 @@ main {
     background-color: rgb(112, 255, 112);
     color: white;
   }
+}
+
+.empty__message {
+  font-size: 14px;
 }

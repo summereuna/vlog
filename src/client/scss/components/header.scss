@@ -1,4 +1,7 @@
 header {
+  z-index: 5;
+  position: fixed;
+  width: 100%;
   background-color: $bg;
   box-sizing: border-box;
   height: 58px;
@@ -8,38 +11,58 @@ header {
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  i {
-    font-size: 20px;
-  }
-  .header__logo {
-    color: $deep-purple;
-    font-weight: 800;
-    margin-left: 25px;
-    font-size: 22px;
-    i {
-      font-size: 15px;
+  .header__icons {
+    display: flex;
+    .header__logo {
+      text-align: start;
+      min-width: 70px;
+      margin-left: 25px;
+      display: block;
+      color: $deep-purple;
+      font-weight: 800;
+      font-size: 22px;
+      i {
+        font-size: 15px;
+        color: rgb(100, 100, 100);
+      }
     }
   }
   ul {
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    justify-content: end;
     align-items: center;
     li {
-      margin-left: 30px;
+      display: block;
+      margin-left: 20px;
       font-size: 14px;
-      font-weight: 600;
-      text-transform: uppercase;
+      color: rgb(100, 100, 100);
     }
     i {
       font-size: 20px;
+      color: rgb(100, 100, 100);
     }
   }
-  .header__btn {
-    background-color: $deep-purple;
-    color: $bg;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
+}
+.header__btn {
+  border: none;
+  border: 1px solid $link;
+  background-color: $link;
+  color: $bg;
+  width: 80px;
+  height: 40px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+.header__btn-log {
+  border: none;
+  border: 1px solid $link;
+  background-color: $bg;
+  color: $link;
+  width: 80px;
+  height: 40px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 .header__avatar {
@@ -49,4 +72,53 @@ header {
   background-image: $mix;
   background-size: cover;
   background-position: center;
+}
+
+.header__search {
+  height: 40%;
+  display: flex;
+  align-items: center;
+  .search__form {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    input {
+      border: none;
+      outline: none;
+      display: block;
+      height: 40px;
+      width: 100%;
+      padding: 2px 6px;
+      background-color: &bg;
+      font-size: 15px;
+      border: 1px solid $main-border-color;
+    }
+    button {
+      border: none;
+      background-color: $bg;
+      border: 1px solid $main-border-color;
+      display: block;
+      width: 64px;
+      height: 40px;
+      font-size: 18px;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.2s ease-in-out;
+    }
+    button:hover {
+      background-color: $main-border-color;
+    }
+  }
+}
+
+.flex-container {
+  .flex1 {
+    flex: 1 1 20em;
+  }
+  .flex2 {
+    flex: 1 1 644px;
+  }
+  .flex3 {
+    flex: 1 1 20em;
+  }
 }
