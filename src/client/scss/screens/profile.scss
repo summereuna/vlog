@@ -5,12 +5,13 @@
   display: flex;
   flex-direction: column;
   .profile__user {
-    height: 150;
+    height: 150px;
     padding: 16px 57px;
     display: flex;
     flex-direction: row;
     align-items: center;
     font-size: 30px;
+    position: relative;
     img {
       margin-bottom: 10px;
       width: 80px;
@@ -18,15 +19,20 @@
       margin-right: 15px;
     }
     .profile__user-info {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
       h1 {
         font-size: 20px;
         font-weight: 600;
         margin-bottom: 5px;
       }
-      h3 {
-        font-size: 13px;
-        font-weight: 400;
-        color: $link;
+      button {
+        position: absolute;
+        right: 0;
+        bottom: 38%;
+        margin: 0;
       }
     }
   }
@@ -44,7 +50,13 @@
       min-width: 550px;
       display: flex;
       flex-direction: column;
+      .profile__section-title {
+        width: 87px;
+        border-top: 2px solid $sub-color;
+        padding-top: 10px;
+      }
       h2 {
+        width: 100%;
         font-size: 18px;
         font-weight: 600;
         padding: 5px 0 25px 2px;
@@ -95,6 +107,11 @@
       background-color: #f1f1f1;
       min-width: 550px;
       margin: 0 auto;
+      .profile__section-title {
+        width: 75px;
+        border-top: 2px solid $sub-color;
+        padding-top: 10px;
+      }
       h2 {
         font-size: 18px;
         font-weight: 600;

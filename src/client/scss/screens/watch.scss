@@ -225,3 +225,17 @@
   width: 426px;
   padding: 24px 24px 0 0;
 }
+
+.video__editContainer {
+  margin-top: 20px;
+  margin-left: 64px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  .margin-left {
+    margin: 0 4px 0 10px;
+    width: 70px;
+    height: 35px;
+  }
+}

@@ -64,6 +64,16 @@ header {
   padding: 5px 10px;
   cursor: pointer;
 }
+.header__btn-logout {
+  border: none;
+  border: 1px solid $main-border-color;
+  background-color: $bg;
+  color: $sub-color;
+  width: 80px;
+  height: 38px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
 
 .header__avatar {
   width: 32px;

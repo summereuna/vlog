@@ -24,6 +24,10 @@
         font-size: 18px;
         margin-top: 18px;
         margin-bottom: 30px;
+        span {
+          color: $deep-purple;
+          font-weight: 800;
+        }
       }
     }
   }
@@ -55,21 +59,22 @@
   .form__input:focus {
     border-color: $color;
   }
-  .form__input-submit {
-    margin: 20px 20px 0 20px;
-    background-color: $bg;
-    padding: 5px;
-    color: $link;
-    width: 110px;
-    height: 40px;
-    border: 1px solid $link;
-    transition: background-color 0.2s ease-in-out;
-    cursor: pointer;
-  }
-  .form__input-submit:hover {
-    background-color: $link;
-    color: $bg;
-  }
+}
+
+.form__input-submit {
+  margin: 20px 20px 0 20px;
+  background-color: $bg;
+  padding: 5px;
+  color: $link;
+  width: 110px;
+  height: 40px;
+  border: 1px solid $link;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+.form__input-submit:hover {
+  background-color: $link;
+  color: $bg;
 }
 
 .form__input-submit-bg {
@@ -103,4 +108,21 @@
   background-color: $main-border-color;
   border-color: $main-border-color;
   color: $link;
+}
+
+.form__input-submit-record {
+  margin: 20px 20px 0 20px;
+  background-color: $bg;
+  padding: 5px;
+  color: $red;
+  width: 150px;
+  height: 40px;
+  border: 1px solid $red;
+  transition: background-color 0.2s ease-in-out;
+  cursor: pointer;
+}
+.form__input-submit-record:hover {
+  background-color: $red;
+  border-color: $red;
+  color: $bg;
 }
