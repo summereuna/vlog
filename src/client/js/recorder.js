@@ -73,13 +73,13 @@ const handleDownload = async () => {
   URL.revokeObjectURL(videoFile);
   //Transcoding 끝나면 버튼 다시 보이게 하고 레코드 다시 시작할 수 있게하기
   actionBtn.disabled = false;
-  actionBtn.innerText = "Record Again!";
+  actionBtn.innerText = "다시 녹화하기";
   actionBtn.addEventListener("click", handleStart);
 };
 
 //start 버튼 누르면 스트림 녹화하기
 const handleStart = () => {
-  actionBtn.innerText = "Recording";
+  actionBtn.innerText = "녹화 중";
   actionBtn.disabled = true;
   actionBtn.removeEventListener("click", handleStart);
   recorder = new MediaRecorder(stream, { mimeType: "video/webm" });
@@ -89,7 +89,7 @@ const handleStart = () => {
     video.src = videoFile;
     video.loop = true;
     video.play();
-    actionBtn.innerText = "Download";
+    actionBtn.innerText = "다운로드";
     actionBtn.disabled = false;
     actionBtn.addEventListener("click", handleDownload);
   };

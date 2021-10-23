@@ -9,7 +9,7 @@ export const home = async (req, res) => {
   const videos = await Video.find({})
     .sort({ createdAt: "desc" })
     .populate("owner");
-  return res.render("home", { pageTitle: "Home", videos });
+  return res.render("home", { pageTitle: "홈", videos });
 };
 
 export const watch = async (req, res) => {
@@ -19,7 +19,9 @@ export const watch = async (req, res) => {
   const { id } = req.params;
   const video = await Video.findById(id).populate("owner").populate("comments");
   if (!video) {
-    return res.status(404).render("404", { pageTitle: `Video not found.` });
+    return res
+      .status(404)
+      .render("404", { pageTitle: `비디오를 찾을 수 없습니다.` });
   }
   return res.render("watch", { pageTitle: video.title, video, videos });
 };
@@ -31,13 +33,18 @@ export const getEdit = async (req, res) => {
   } = req.session;
   const video = await Video.findById(id);
   if (!video) {
-    return res.status(404).render("404", { pageTitle: `Video not found.` });
+    return res
+      .status(404)
+      .render("404", { pageTitle: `비디오를 찾을 수 없습니다.` });
   }
   if (String(video.owner) !== String(_id)) {
-    req.flash("error", "Not authorized");
+    req.flash("error", "승인되지 않은 접근입니다.");
     return res.status(403).redirect("/");
   }
-  return res.render("videos/edit", { pageTitle: `Edit ${video.title}`, video });
+  return res.render("videos/edit", {
+    pageTitle: `${video.title} 수정`,
+    video,
+  });
 };
 
 //Saving the Changes
@@ -52,10 +59,12 @@ export const postEdit = async (req, res) => {
   //exists에서 findById로 변경
   const video = await Video.findById({ _id: id });
   if (!video) {
-    return res.status(404).render("404", { pageTitle: `Video not found.` });
+    return res
+      .status(404)
+      .render("404", { pageTitle: `비디오를 찾을 수 없습니다.` });
   }
   if (String(video.owner) !== String(_id)) {
-    req.flash("error", "You are not the owner of the video.");
+    req.flash("error", "승인되지 않은 접근입니다.");
     return res.status(403).redirect("/");
   }
   await Video.findByIdAndUpdate(id, {
@@ -63,12 +72,12 @@ export const postEdit = async (req, res) => {
     description,
     hashtags: Video.formatHashtags(hashtags),
   });
-  req.flash("success", "Changes saved");
+  req.flash("success", "비밀번호가 변경되었습니다.");
   return res.redirect(`/videos/${id}`);
 };
 
 export const getUpload = (req, res) => {
-  return res.render("videos/upload", { pageTitle: `Upload Video` });
+  return res.render("videos/upload", { pageTitle: `동영상 업로드` });
 };
 
 export const postUpload = async (req, res) => {
@@ -92,7 +101,7 @@ export const postUpload = async (req, res) => {
     return res.redirect("/");
   } catch (error) {
     return res.status(400).render("videos/upload", {
-      pageTitle: "Upload Video",
+      pageTitle: "동영상 업로드",
       errorMessage: error._message,
     });
   }
@@ -107,6 +116,7 @@ export const deleteVideo = async (req, res) => {
     return res.status(403).redirect("/");
   }
   await Video.findByIdAndDelete(id);
+  req.flash("success", "동영상이 삭제되었습니다.");
   return res.redirect("/");
 };
 
@@ -120,7 +130,7 @@ export const search = async (req, res) => {
       },
     }).populate("owner");
   }
-  return res.render("search", { pageTitle: "Search", videos });
+  return res.render("search", { pageTitle: "검색", videos });
 };
 
 //조회수
