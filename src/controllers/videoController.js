@@ -72,7 +72,7 @@ export const postEdit = async (req, res) => {
     description,
     hashtags: Video.formatHashtags(hashtags),
   });
-  req.flash("success", "비밀번호가 변경되었습니다.");
+  req.flash("success", "동영상 정보가 수정되었습니다.");
   return res.redirect(`/videos/${id}`);
 };
 
@@ -112,11 +112,12 @@ export const deleteVideo = async (req, res) => {
   const {
     user: { _id },
   } = req.session;
+  const video = await Video.findById(id);
   if (String(video.owner) !== String(_id)) {
     return res.status(403).redirect("/");
   }
+  req.flash("success", "동영상이 삭제 되었습니다.");
   await Video.findByIdAndDelete(id);
-  req.flash("success", "동영상이 삭제되었습니다.");
   return res.redirect("/");
 };
 

@@ -207,6 +207,7 @@ export const postEdit = async (req, res) => {
     { new: true }
   );
   req.session.user = updatedUser;
+  req.flash("success", "프로필을 수정하였습니다.");
   return res.redirect("/users/edit");
 };
 

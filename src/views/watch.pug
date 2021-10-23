@@ -55,11 +55,11 @@ block content
                                 a(href=`/users/${video.owner._id}`) #{video.owner.name}
                             small 구독자 0명
                     if String(video.owner._id) === loggedInUser._id
-                    div.video__editContainer
-                        a(href=`${video.id}/edit`)
-                            button.form__input-submit.margin-left 수정
-                        a(href=`${video.id}/delete`)
-                            button.form__input-submit.margin-left 삭제
+                        div.video__editContainer
+                            a(href=`${video.id}/edit`)
+                                button.form__input-submit.margin-left 수정
+                            a(href=`${video.id}/delete`)
+                                button.form__input-submit.margin-left 삭제
                 h2.video__data-detail__description #{video.description}
             article.video__comments-section
                 div.video__comments-info
