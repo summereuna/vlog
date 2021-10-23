@@ -175,8 +175,15 @@ export const createComment = async (req, res) => {
   video.save();
   userInfo.comments.push(comment._id);
   userInfo.save();
+  const newComment = await Comment.findById(comment._id)
+    .populate("video")
+    .populate("owner");
   return res.status(201).json({
     newCommentId: comment._id,
+    text: newComment.text,
+    owner: newComment.owner.name,
+    avatarUrl: newComment.owner.avatarUrl,
+    createdAt: newComment.createdAt,
   });
 };
 

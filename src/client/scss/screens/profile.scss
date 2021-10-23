@@ -47,6 +47,7 @@
     .profile__data-videos {
       padding: 30px;
       background-color: #f1f1f1;
+      max-width: 600px;
       min-width: 550px;
       display: flex;
       flex-direction: column;
@@ -105,6 +106,7 @@
     .profile__data-comments {
       padding: 30px;
       background-color: #f1f1f1;
+      max-width: 600px;
       min-width: 550px;
       margin: 0 auto;
       .profile__section-title {
