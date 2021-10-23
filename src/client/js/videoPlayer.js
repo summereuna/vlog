@@ -13,8 +13,8 @@ const fullScreenBtn = document.getElementById("fullScreen");
 const fullScreenIcon = fullScreenBtn.querySelector("i");
 const videoContainer = document.getElementById("videoContainer");
 const videoControls = document.getElementById("videoControls");
-const inputSearch = document.querySelector("#input-search");
-const inputComment = document.querySelector("#input-comment");
+const inputSearch = document.getElementById("input-search");
+const inputComment = document.getElementById("input-comment");
 
 //전역변수 설정
 let controlsTimeout = null;
@@ -140,6 +140,11 @@ const handleKeyCheck = (event) => {
 };
 
 const handleAddKeyCheck = () => {
+  if (!inputComment) {
+    inputSearch.removeEventListener("focus", handleRemoveKeyCheck);
+    document.addEventListener("keydown", handleKeyCheck);
+    inputSearch.addEventListener("focus", handleRemoveKeyCheck);
+  }
   inputComment.removeEventListener("focus", handleRemoveKeyCheck);
   inputSearch.removeEventListener("focus", handleRemoveKeyCheck);
   document.addEventListener("keydown", handleKeyCheck);
@@ -148,6 +153,10 @@ const handleAddKeyCheck = () => {
 };
 
 const handleRemoveKeyCheck = () => {
+  if (!inputComment) {
+    document.removeEventListener("keydown", handleKeyCheck);
+    inputSearch.addEventListener("blur", handleAddKeyCheck);
+  }
   document.removeEventListener("keydown", handleKeyCheck);
   inputComment.addEventListener("blur", handleAddKeyCheck);
   inputSearch.addEventListener("blur", handleAddKeyCheck);
@@ -180,7 +189,9 @@ videoContainer.addEventListener("mouseleave", handleMouseLeave);
 timeline.addEventListener("input", handleTimelineChange);
 fullScreenBtn.addEventListener("click", handleFullScreen);
 document.addEventListener("keydown", handleKeyCheck);
-inputComment.addEventListener("focus", handleRemoveKeyCheck);
+if (inputComment) {
+  inputComment.addEventListener("focus", handleRemoveKeyCheck);
+}
 inputSearch.addEventListener("focus", handleRemoveKeyCheck);
 videoContainer.addEventListener("fullscreenchange", handleExitFullscreen);
 video.addEventListener("click", handlePlayClick);
