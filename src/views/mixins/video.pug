@@ -4,11 +4,14 @@ mixin video(video)
             div.video-mixin__thumb(style=`background-image:url(/${video.thumbnailUrl});background-size:cover;background-position:center;`)
             div.video-mixin__data
                 div.video-mixin__avatar
-                    img(src=`/${video.owner.avatarUrl}`, alt="avatar", width="50", height="50")
+                    if video.owner.avatarUrl === undefined
+                        div(width="50", height="50").video-mixin__avatar-img
+                            i.fas.fa-user
+                    else
+                        img(src=`/${video.owner.avatarUrl}`, width="50", height="50").video-mixin__avatar-img
                 div.video-mixin__info
                     span.video-mixin__title=video.title
                     div.video-mixin__meta
                         p.video-mixin__owner=video.owner.name
-                            //-a(href=`/users/${video.owner._id}`) #{video.owner.name}
                         span 조회수 #{video.meta.views} • 
                         span=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})

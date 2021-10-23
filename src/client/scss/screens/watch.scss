@@ -73,13 +73,6 @@
         height: 66px;
         .video__owner-image {
           padding-right: 16px;
-          img {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background-position: center;
-            background-image: $mix;
-          }
         }
         .video__owner-info {
           height: 40px;
@@ -214,6 +207,7 @@
             top: 5px;
             right: 3px;
             position: absolute;
+            cursor: pointer;
           }
         }
       }
@@ -237,5 +231,37 @@
     margin: 0 4px 0 10px;
     width: 70px;
     height: 35px;
+  }
+}
+
+.avatar_default {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: $purple;
+  position: relative;
+  i {
+    position: absolute;
+    font-size: 25px;
+    color: $sub-bg;
+    left: 13px;
+    top: 10px;
+  }
+}
+.avatar_default-img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-position: center;
+  background-color: $purple;
+}
+
+.avatar-m {
+  width: 40px;
+  height: 40px;
+  i {
+    font-size: 20px;
+    left: 11px;
+    top: 9px;
   }
 }

@@ -7,14 +7,14 @@ block content
     section.profile
         article.profile__user
             section
-                if String(user.avatartUrl)
+                if user.avatarUrl === ""
+                    div.avatar
+                        i.fas.fa-user
+                else if user.avatarUrl === undefined
+                    div.avatar
+                        i.fas.fa-user
+                else
                     img(src=`/${user.avatarUrl}`, crossorigin).avatar
-                else if user.avatartUrl === undefined
-                    div.avatar
-                        i.fas.fa-user
-                else if user.avatartUrl ===  ""
-                    div.avatar
-                        i.fas.fa-user
             section.profile__user-info
                 h1=user.name
                 if String(user._id) === loggedInUser._id

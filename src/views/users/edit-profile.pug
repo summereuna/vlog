@@ -4,9 +4,12 @@ block content
     include ../partials/sidenav
     section.profile
         article.profile__user
-            if loggedInUser.avatartUrl === ""
+            if loggedInUser.avatarUrl === ""
                 div.avatar
                     i.fas.fa-user
+            else if loggedInUser.avatarUrl === undefined
+                    div.avatar
+                        i.fas.fa-user
             else
                 img(src=`/${loggedInUser.avatarUrl}`).avatar
             section.profile__user-info

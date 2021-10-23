@@ -10,5 +10,5 @@ block content
                     form.form(method="POST")
                         input.form__input(name="title", placeholder="제목*", value=video.title, required, type="text", maxlength=80)
                         input.form__input(name="description", placeholder="설명*", value=video.description, required, type="text", minlength=5)
-                        input.form__input(name="hashtags", placeholder=`#해시태그는 ","로 구분하여 입력하세요.`, value=video.hashtags.join(), required, type="text")
+                        input.form__input(name="hashtags", placeholder=`#해시태그는 ","로 구분하여 입력하세요.*`, value=video.hashtags.join(), required, type="text")
                         input.form__input-submit-point.edit-profile__submit(value="저장하기", type="submit")

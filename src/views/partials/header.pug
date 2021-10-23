@@ -19,9 +19,9 @@ header.flex-container
                         <i class="fas fa-video"></i>
                 li
                     a(href=`/users/${loggedInUser._id}`) 
-                        if loggedInUser.avatartUrl === ""
+                        if loggedInUser.avatarUrl === ""
                             i.fas.fa-user
-                        else if loggedInUser.avatartUrl === undefined
+                        else if loggedInUser.avatarUrl === undefined
                             i.fas.fa-user
                         else
                             img.header__avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin)

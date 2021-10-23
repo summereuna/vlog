@@ -1,5 +1,6 @@
 extends base
 include mixins/video-aside
+include mixins/watch-comment
 
 block content
     section.video__watch
@@ -48,8 +49,13 @@ block content
             article.video__data-detail
                 div.video__data-detail__owner
                     div.video__data-detail__owner-info
-                        div.video__owner-image
-                            img(src=`/${video.owner.avatarUrl}`, alt="avatar", width="50", height="50")
+                        a(href=`/users/${video.owner._id}`)
+                            div.video__owner-image
+                                if video.owner.avatarUrl === undefined
+                                    div(width="50", height="50").avatar_default
+                                        i.fas.fa-user
+                                else
+                                    img.avatar_default-img(src=`/${video.owner.avatarUrl}`,width="50", height="50")
                         div.video__owner-info
                             p.video__owner
                                 a(href=`/users/${video.owner._id}`) #{video.owner.name}
@@ -67,7 +73,11 @@ block content
                     if loggedIn
                         div.video__comments-add
                             div.video__comments-add__user
-                                img.header__avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin)
+                                if loggedInUser.avatarUrl === undefined
+                                    div(width="50", height="50").avatar_default.avatar-m
+                                        i.fas.fa-user
+                                else
+                                    img.avatar_default-img.avatar-m(src=`/${loggedInUser.avatarUrl}`, crossorigin)
                             div.video__comments-add__comment
                                 form.video__comments-add__comment-form#commentForm
                                     input#input-comment(placeholder="공개 댓글 추가...")
@@ -75,22 +85,15 @@ block content
                 div.video__comments-list
                     ul
                         each comment in video.comments.reverse()
-                            li.video__comment(data-id=comment._id)
-                                div.video__comment-content
-                                    div.video__comment-content__user-avatar
-                                        img.header__avatar(src=`/${comment.owner.avatarUrl}`, crossorigin)
-                                    div.video__comment-content__main
-                                        div.video__comment-content__main-info
-                                            h4=comment.owner
-                                            span=new Date(comment.createdAt).toLocaleDateString({ year: 'numeric', month: 'long', day: 'numeric'})
-                                        span #{comment.text}
-                                    if String(comment.owner._id) === loggedInUser._id
-                                        i.video__comment-delete.fas.fa-trash-alt
+                            +comment(comment)
+                        else
+                            span.empty__message 댓글이 없습니다.
+
         aside.video__watch-aside
             each video in videos
                 +video(video)
             else
-                span.empty__message No videos found.
+                span.empty__message 업로드된 비디오가 없습니다.
 
 block scripts
     script(src="/static/js/videoPlayer.js")

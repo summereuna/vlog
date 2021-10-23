@@ -26,7 +26,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background-image: $mix;
+  background-color: $purple;
   position: relative;
   margin-right: 15px;
   i {
@@ -34,6 +34,24 @@
     position: absolute;
     bottom: 18px;
     left: 18px;
-    color: $bg;
+    color: $sub-bg;
+  }
+}
+
+.video-mixin__avatar-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
+  margin: 12px 12px 0 0;
+  background-color: $purple;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  i {
+    position: absolute;
+    font-size: 20px;
+    color: $sub-bg;
+    left: 9px;
+    top: 6px;
   }
 }

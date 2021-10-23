@@ -1,0 +1,17 @@
+mixin comment(comment)
+    li.video__comment(data-id=comment._id)
+        div.video__comment-content
+            div.video__comment-content__user-avatar
+                a(href=`/users/${comment.owner._id}`)
+                    if comment.owner.avatarUrl === undefined
+                        div(width="50", height="50").avatar_default.avatar-m
+                            i.fas.fa-user
+                    else
+                        img.avatar_default-img.avatar-m(src=`/${comment.owner.avatarUrl}`, crossorigin)
+            div.video__comment-content__main
+                div.video__comment-content__main-info
+                    h4=comment.owner.name
+                    span=new Date(comment.createdAt).toLocaleDateString({ year: 'numeric', month: 'long', day: 'numeric'})
+                span #{comment.text}
+            if String(comment.owner._id) === String(loggedInUser._id)
+                i.video__comment-delete.fas.fa-trash-alt

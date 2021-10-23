@@ -17,7 +17,15 @@ export const watch = async (req, res) => {
     .sort({ createdAt: "desc" })
     .populate("owner");
   const { id } = req.params;
-  const video = await Video.findById(id).populate("owner").populate("comments");
+  const video = await Video.findById(id)
+    .populate("owner")
+    .populate({
+      path: "comments",
+      populate: {
+        path: "owner",
+        model: "User",
+      },
+    });
   if (!video) {
     return res
       .status(404)
@@ -167,12 +175,8 @@ export const createComment = async (req, res) => {
   video.save();
   userInfo.comments.push(comment._id);
   userInfo.save();
-  const commentOwner = await Comment.findById(comment._id).populate("owner");
   return res.status(201).json({
     newCommentId: comment._id,
-    ownerAvatarUrl: commentOwner.owner.avatarUrl,
-    ownerName: commentOwner.owner.name,
-    createdAt: comment.createdAt,
   });
 };
 

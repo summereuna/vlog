@@ -7,6 +7,5 @@ mixin video(video)
                     span.video-aside-mixin__title=video.title
                     div.video-aside-mixin__meta
                         p.video-aside-mixin__owner=video.owner.name
-                            //-a(href=`/users/${video.owner._id}`) #{video.owner.name}
                         span 조회수 #{video.meta.views} • 
                         span=new Date(video.createdAt).toLocaleDateString("ko-kr", {weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'})
