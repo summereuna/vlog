@@ -25,7 +25,7 @@ header.flex-container
                             i.fas.fa-user
                         else
                             if loggedInUser.avatarUrl.include("github")
-                                img.header__avatar(src=`${loggedInUser.avatarUrl}`, crossorigin)
+                                img.header__avatar(src=loggedInUser.avatarUrl, crossorigin)
                             else
                                 img.header__avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin)
             li
