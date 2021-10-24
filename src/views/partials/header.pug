@@ -24,13 +24,13 @@ header.flex-container
                         else if loggedInUser.avatarUrl === undefined
                             i.fas.fa-user
                         else
-                            if loggedInUser.socialOnly
+                            if loggedInUser.avatarUrl.include("github")
                                 img.header__avatar(src=`${loggedInUser.avatarUrl}`, crossorigin)
                             else
                                 img.header__avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin)
-                li
-                    a(href="/login")
-                        button.header__btn-log 로그인
-                li
-                    a(href="/join")
-                        button.header__btn 회원가입
+            li
+                a(href="/login")
+                    button.header__btn-log 로그인
+            li
+                a(href="/join")
+                    button.header__btn 회원가입
