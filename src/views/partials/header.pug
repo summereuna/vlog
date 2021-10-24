@@ -24,8 +24,10 @@ header.flex-container
                         else if loggedInUser.avatarUrl === undefined
                             i.fas.fa-user
                         else
-                            img.header__avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin)
-            else
+                            if loggedInUser.socialOnly
+                                img.header__avatar(src=`${loggedInUser.avatarUrl}`, crossorigin)
+                            else
+                                img.header__avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin)
                 li
                     a(href="/login")
                         button.header__btn-log 로그인
