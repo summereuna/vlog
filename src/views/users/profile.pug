@@ -14,7 +14,7 @@ block content
                     div.avatar
                         i.fas.fa-user
                 else
-                    img(src=`/${user.avatarUrl}`, crossorigin).avatar
+                    img(src=`${user.avatarUrl}`, crossorigin).avatar
             section.profile__user-info
                 h1=user.name
                 if String(user._id) === loggedInUser._id

@@ -1,4 +1,23 @@
-import multer, { MulterError } from "multer";
+import multer from "multer";
+import multerS3 from "multer-s3";
+import aws from "aws-sdk";
+
+//s3 오브젝트 만들기
+//옵션으로 AWS_ID와 AWS_SECRET 둘 다 옵션으로 전달해야 한다.
+const s3 = new aws.S3({
+  credentials: {
+    accessKeyId: process.env.AWS_ID,
+    secretAccessKey: process.env.AWS_SECRET,
+  },
+});
+
+//multer s3 만들기
+const multerUploader = multerS3({
+  s3: s3,
+  bucket: "vlog2021",
+  //acl 추가
+  acl: "public-read",
+});
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
@@ -32,6 +51,8 @@ export const avatarUpload = multer({
   limits: {
     fileSize: 3000000,
   },
+  //파일시스템이 아닌 AWS 사용할 거기 때문에 aws-sdk 패키지 다운받아야 함
+  storage: multerUploader,
 });
 
 export const videoUpload = multer({
@@ -39,4 +60,5 @@ export const videoUpload = multer({
   limits: {
     fileSize: 30000000,
   },
+  storage: multerUploader,
 });
