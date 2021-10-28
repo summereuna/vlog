@@ -195,3 +195,7 @@ if (inputComment) {
 inputSearch.addEventListener("focus", handleRemoveKeyCheck);
 videoContainer.addEventListener("fullscreenchange", handleExitFullscreen);
 video.addEventListener("click", handlePlayClick);
+
+if (video.readyState == 4) {
+  handleLoadedMetaData();
+}
