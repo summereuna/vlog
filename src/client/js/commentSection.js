@@ -7,14 +7,18 @@ const addComment = (id, text, owner, avatarUrl, createdAt) => {
   const li = document.createElement("li");
   li.className = "video__comment";
   li.dataset.id = id;
+
   const li_div = document.createElement("div");
   li_div.className = "video__comment-content";
+
   const li_div_user = document.createElement("div");
   li_div_user.className = "video__comment-content__user-avatar";
+
   const li_div_user_avatar = document.createElement("img");
   li_div_user_avatar.className = "avatar_default-img avatar-m";
   li_div_user_avatar.src = `${avatarUrl}`;
-  li_div_user_avatar.setAttribute = `crossorigin`;
+  li_div_user_avatar.crossOrigin = "anonymous";
+
   const li_div_comment = document.createElement("div");
   li_div_comment.className = "video__comment-content__main";
   const li_div_comment_info = document.createElement("div");
