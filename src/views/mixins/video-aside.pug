@@ -1,7 +1,8 @@
 mixin video(video)
     article
         a(href=`/videos/${video.id}`).video-aside-mixin
-            section.video-aside-mixin__thumb(style=`background-image:url(${video.thumbnailUrl});background-size:cover;background-position:center;`)
+            div.video-aside-mixin__thumb
+                img(src=video.thumbnailUrl, crossorigin)
             section.video-aside-mixin__data
                 div.video-aside-mixin__info
                     span.video-aside-mixin__title=video.title
