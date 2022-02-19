@@ -103,9 +103,7 @@ export const finishGithubLogin = async (req, res) => {
   ).json();
   if ("access_token" in tokenRequest) {
     const { access_token } = tokenRequest;
-    //2. 중복되니까 apiUrl 앞부분만 떼서 변수로 주고 fetch에서 뒷부분 편하게 사용할 수 있게 변수로 주자.
     const apiUrl = "https://api.github.com";
-    //1. 이 부분에서 user의 데이터를 가져오고 있으니까 이름 바꾸자
     const userData = await (
       await fetch(`${apiUrl}/user`, {
         headers: {
@@ -113,8 +111,6 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    //console.log(userData);
-    //4.유저데이터는 위에서 불러올수 있으니까 이제 이메일 데이터도 불러와보자
     const emailData = await (
       await fetch(`${apiUrl}/user/emails`, {
         headers: {
@@ -122,19 +118,14 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    //이메일 오브젝트 = 이메일 오브젝트들 중에 프라이머리랑 베리파이드가 트루인 이메일을 찾아라
     const emailObj = emailData.find(
       (email) => email.primary === true && email.verified === true
     );
     if (!emailObj) {
-      //그런 이베일 오브젝트가 없으면 로그인 화면으로 다시 보내기
       req.flash("error", "Github을 이용할 수 없습니다.");
       return res.redirect("/login");
     }
-    //이 부분에 도착하면 유저데이터/이멜데이터 다 받은 상태
-    //이제 DB에 있는 기존 user의 email이 깃헙에서 가져온 유저의 emailObj.email와 같은 user찾기
     let user = await User.findOne({ email: emailObj.email });
-    // DB에 같은 이메일 가진 user가 없으면, 유저의 깃헙 정보로 사이트 계정 생성할 수 있게 해주기
     if (!user) {
       user = await User.create({
         name: userData.name ? userData.name : "Unknown",
@@ -146,12 +137,10 @@ export const finishGithubLogin = async (req, res) => {
         location: userData.location,
       });
     }
-    // DB에 같은 이메일 가진 user가 있으면 로그인 시켜주쇼 -> 세션에 로그드인 트루/유저 데이터 넣어주기 -> 그리고 나서 홈으로 보내주자
     req.session.loggedIn = true;
     req.session.user = user;
     req.flash("info", "Github으로 로그인했습니다!");
     return res.redirect("/");
-    //이제 깃헙으로 로그인 했음!
   } else {
     req.flash("error", "Github을 이용할 수 없습니다.");
     return res.redirect("/login");
