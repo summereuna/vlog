@@ -3,9 +3,9 @@
   .video-mixin__thumb {
     height: 176px;
     width: 315px;
-  }
-  img {
-    width: 100%;
+    .video-mixin__thumb--img {
+      width: 100%;
+    }
   }
   .video-mixin__data {
     margin-top: 12px;

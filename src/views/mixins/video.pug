@@ -2,7 +2,7 @@ mixin video(video)
     a(href=`/videos/${video.id}`).video-mixin
         article
             div.video-mixin__thumb
-                img(src=video.thumbnailUrl, crossorigin)
+                img(src=video.thumbnailUrl, crossorigin).video-mixin__thumb--img
             div.video-mixin__data
                 div.video-mixin__avatar
                     if video.owner.avatarUrl === undefined
