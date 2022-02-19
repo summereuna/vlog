@@ -24,7 +24,6 @@ header.flex-container
                         else if loggedInUser.avatarUrl === undefined
                             i.fas.fa-user
                         else
-<<<<<<< HEAD
                             if loggedInUser.avatarUrl
                                 if loggedInUser.avatarUrl.includes("github")
                                     img.header__avatar(src=`${loggedInUser.avatarUrl}`, crossorigin)
@@ -37,15 +36,3 @@ header.flex-container
                 li
                     a(href="/join")
                         button.header__btn 회원가입
-=======
-                            if loggedInUser.avatarUrl.include("github")
-                                img.header__avatar(src=loggedInUser.avatarUrl, crossorigin)
-                            else
-                                img.header__avatar(src=`/${loggedInUser.avatarUrl}`, crossorigin)
-            li
-                a(href="/login")
-                    button.header__btn-log 로그인
-            li
-                a(href="/join")
-                    button.header__btn 회원가입
->>>>>>> 5d687619de9ab798547ca29484d2be92bd289c28
