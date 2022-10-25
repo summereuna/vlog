@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "The best way to watch videos.",
   "main": "index.js",
+  "engines": {
+    "node": "14.19.0",
+    "npm": "6.14.16"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/summereuna/wetube.git"
