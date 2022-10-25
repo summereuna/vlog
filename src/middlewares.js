@@ -14,7 +14,7 @@ const s3 = new aws.S3({
 //multer s3 만들기
 const multerUploader = multerS3({
   s3: s3,
-  bucket: "vlog2021",
+  bucket: "vlog2021v2",
   //acl 추가
   acl: "public-read",
 });
