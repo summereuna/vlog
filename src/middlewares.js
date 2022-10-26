@@ -5,6 +5,8 @@ import aws from "aws-sdk";
 //s3 오브젝트 만들기
 //옵션으로 AWS_ID와 AWS_SECRET 둘 다 옵션으로 전달해야 한다.
 const s3 = new aws.S3({
+  signatureVersion: "v4",
+  region: "ap-northeast-2",
   credentials: {
     accessKeyId: process.env.AWS_ID,
     secretAccessKey: process.env.AWS_SECRET,
