@@ -183,11 +183,17 @@ export const postEdit = async (req, res) => {
       errorMessage: "이미 사용중인 아이디 혹은 이메일입니다.",
     });
   }
+
+  //🚀 Heroku 사용 중인지 확인하는 변수 추가
+  const isHeroku = process.env.NODE_ENV === "production";
   //없다면 계속 진행하여 유저 업데이트 해주기
   const updatedUser = await User.findByIdAndUpdate(
     _id,
     {
-      avatarUrl: file ? file.location : avatarUrl,
+      avatarUrl: file ? (isHeroku ? file.location : file.path) : avatarUrl,
+      //👉 file이 isHeroku면 file.location 사용하고,
+      // file이 localhost면 file.path사용
+      //그리고 파일이 없으면 user에 기존 avatarUrl이 있는지 확인
       name,
       email,
       username,

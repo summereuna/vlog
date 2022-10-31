@@ -1,11 +1,10 @@
 #videoContainer {
-  width: 950px;
-  height: 534px;
   position: relative;
   video {
     width: 100%;
   }
   .videoControls {
+    width: 100%;
     display: flex;
     flex-direction: column;
     opacity: 0;
@@ -30,7 +29,7 @@
     .videoControls__range {
       overflow: hidden;
       height: 5px;
-      width: 923px;
+      width: 97%;
       margin-bottom: 15px;
     }
   }
@@ -38,7 +37,7 @@
 
 .videoControls__btn {
   font-size: 20px;
-  width: 923px;
+  width: 97%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;

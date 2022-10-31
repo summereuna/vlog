@@ -6,7 +6,7 @@ block content
     section.video__watch
         section.video__watch-video
             article#videoContainer(data-id=video._id)
-                video(src=`${video.fileUrl}`, crossorigin, autoplay="true")
+                video(src=`${isHeroku ? video.fileUrl : `/${video.fileUrl}`}`, crossorigin, autoplay="true")
                 div#videoControls.videoControls
                     input.videoControls__range(type="range",step="1", value="0", min="0")#timeline
                     div.videoControls__btn
@@ -55,7 +55,7 @@ block content
                                     div(width="50", height="50").avatar_default
                                         i.fas.fa-user
                                 else
-                                    img.avatar_default-img(src=`${video.owner.avatarUrl}`, crossorigin, width="50", height="50")
+                                    img.avatar_default-img(src=`${isHeroku ? video.owner.avatarUrl : `/${video.owner.avatarUrl}`}`, crossorigin, width="50", height="50")
                         div.video__owner-info
                             p.video__owner
                                 a(href=`/users/${video.owner._id}`) #{video.owner.name}
@@ -77,7 +77,7 @@ block content
                                     div(width="50", height="50").avatar_default.avatar-m
                                         i.fas.fa-user
                                 else
-                                    img.avatar_default-img.avatar-m(src=`${loggedInUser.avatarUrl}`, crossorigin)
+                                    img.avatar_default-img.avatar-m(src=`${isHeroku ? loggedInUser.avatarUrl : `/${loggedInUser.avatarUrl}`}`, crossorigin)
                             div.video__comments-add__comment
                                 form.video__comments-add__comment-form#commentForm
                                     input#input-comment(placeholder="공개 댓글 추가...")

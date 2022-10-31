@@ -7,7 +7,7 @@ mixin comment(comment)
                         div(width="50", height="50").avatar_default.avatar-m
                             i.fas.fa-user
                     else
-                        img.avatar_default-img.avatar-m(src=`${comment.owner.avatarUrl}`, crossorigin)
+                        img.avatar_default-img.avatar-m(src=`${isHeroku ? comment.owner.avatarUrl : `/${comment.owner.avatarUrl}`}`, crossorigin)
             div.video__comment-content__main
                 div.video__comment-content__main-info
                     h4=comment.owner.name

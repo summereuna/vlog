@@ -94,12 +94,17 @@ export const postUpload = async (req, res) => {
   } = req.session;
   const { video, thumbnail } = req.files;
   const { title, description, hashtags } = req.body;
+
+  //🚀 Heroku 사용 중인지 확인하는 변수 추가
+  const isHeroku = process.env.NODE_ENV === "production";
+
   try {
     const newVideo = await Video.create({
       title,
       description,
-      fileUrl: video[0].location,
-      thumbnailUrl: thumbnail[0].location,
+      //localhost일 때는 uploads 폴더를 사용하고, heroku에서는 s3multer AWS를 사용
+      fileUrl: isHeroku ? video[0].location : video[0].path,
+      thumbnailUrl: isHeroku ? thumbnail[0].location : thumbnail[0].path,
       hashtags: Video.formatHashtags(hashtags),
       owner: _id,
     });

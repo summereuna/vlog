@@ -2,7 +2,7 @@ mixin video(video)
     article
         a(href=`/videos/${video.id}`).video-aside-mixin
             div.video-aside-mixin__thumb
-                img(src=video.thumbnailUrl, crossorigin)
+                img(src=`${isHeroku ? video.thumbnailUrl : `/${video.thumbnailUrl}`}`, crossorigin)
             section.video-aside-mixin__data
                 div.video-aside-mixin__info
                     span.video-aside-mixin__title=video.title

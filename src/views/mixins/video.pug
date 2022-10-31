@@ -2,14 +2,14 @@ mixin video(video)
     a(href=`/videos/${video.id}`).video-mixin
         article
             div.video-mixin__thumb
-                img(src=video.thumbnailUrl, crossorigin).video-mixin__thumb--img
+                img(src=`${isHeroku ? video.thumbnailUrl : `/${video.thumbnailUrl}`}`, crossorigin, width="315px", height="177.19").video-mixin__thumb--img
             div.video-mixin__data
                 div.video-mixin__avatar
                     if video.owner.avatarUrl === undefined
                         div(width="50", height="50").video-mixin__avatar-img
                             i.fas.fa-user
                     else
-                        img(src=`${video.owner.avatarUrl}`, crossorigin, width="50", height="50").video-mixin__avatar-img
+                        img(src=`${isHeroku ? video.owner.avatarUrl : `/${video.owner.avatarUrl}`}`, crossorigin, width="50", height="50").video-mixin__avatar-img
                 div.video-mixin__info
                     span.video-mixin__title=video.title
                     div.video-mixin__meta

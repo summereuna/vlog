@@ -13,7 +13,7 @@ const addComment = (id, text, owner, avatarUrl, createdAt) => {
   li_div_user.className = "video__comment-content__user-avatar";
   const li_div_user_avatar = document.createElement("img");
   li_div_user_avatar.className = "avatar_default-img avatar-m";
-  li_div_user_avatar.src = `${avatarUrl}`;
+  li_div_user_avatar.src = `${isHeroku ? avatarUrl : `/${avatarUrl}`}`;
   li_div_user_avatar.crossOrigin = "anonymous";
   const li_div_comment = document.createElement("div");
   li_div_comment.className = "video__comment-content__main";

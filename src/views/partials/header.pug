@@ -20,15 +20,17 @@ header.flex-container
                 li
                     a(href=`/users/${loggedInUser._id}`) 
                         if loggedInUser.avatarUrl === ""
-                            i.fas.fa-user
+                            div.header__avatarBg
+                                i.fas.fa-user
                         else if loggedInUser.avatarUrl === undefined
-                            i.fas.fa-user
+                            div.header__avatarBg
+                                i.fas.fa-user
                         else
                             if loggedInUser.avatarUrl
                                 if loggedInUser.avatarUrl.includes("github")
-                                    img.header__avatar(src=`${loggedInUser.avatarUrl}`, crossorigin)
+                                    img.header__avatar(src=`${isHeroku ? loggedInUser.avatarUrl : `/${loggedInUser.avatarUrl}`}`, crossorigin)
                                 else
-                                    img.header__avatar(src=`${loggedInUser.avatarUrl}`, crossorigin)
+                                    img.header__avatar(src=`${isHeroku ? loggedInUser.avatarUrl: `/${loggedInUser.avatarUrl}`}`, crossorigin)
             else
                 li
                     a(href="/login")

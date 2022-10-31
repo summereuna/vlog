@@ -6,7 +6,7 @@
 .video-grid {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 .auth-switch {
@@ -46,12 +46,11 @@
   background-color: $purple;
   background-size: cover;
   background-position: center;
-  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   i {
-    position: absolute;
     font-size: 20px;
     color: $sub-bg;
-    left: 9px;
-    top: 6px;
   }
 }

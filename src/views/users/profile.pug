@@ -5,8 +5,8 @@ include ../mixins/comment
 block content
     include ../partials/sidenav
     section.profile
-        article.profile__user
-            section
+        article.profile__user.profile__user__flex
+            section.profile__user-info__flex
                 if user.avatarUrl === ""
                     div.avatar
                         i.fas.fa-user
@@ -14,9 +14,9 @@ block content
                     div.avatar
                         i.fas.fa-user
                 else
-                    img(src=`${user.avatarUrl}`, crossorigin).avatar
-            section.profile__user-info
+                    img(src=`${isHeroku ? user.avatarUrl :`/${loggedInUser.avatarUrl}`}`, crossorigin).avatar
                 h1=user.name
+            section.profile__user-edit__flex
                 if String(user._id) === loggedInUser._id
                     a(href="/users/edit")
                         button.form__input-submit 프로필 수정

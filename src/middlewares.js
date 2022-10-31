@@ -2,6 +2,9 @@ import multer from "multer";
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
 
+//🚀 Heroku 사용중이면 multer s3 사용 O / 로컬이면 s3 사용 X
+const isHeroku = process.env.NODE_ENV === "production";
+console.log("🥺", isHeroku);
 //s3 오브젝트 만들기
 //옵션으로 AWS_ID와 AWS_SECRET 둘 다 옵션으로 전달해야 한다.
 const s3 = new aws.S3({
@@ -13,18 +16,38 @@ const s3 = new aws.S3({
   },
 });
 
-//multer s3 만들기
-const multerUploader = multerS3({
+//multer s3 업로더
+//✅ 이미지 폴더
+const s3ImageUploader = multerS3({
   s3: s3,
   bucket: "vlog2021v2",
-  //acl 추가
   acl: "public-read",
+  // bucket 안에 folder 속에 file 분류하기
+  key: function (request, file, ab_callback) {
+    const newFileName = Date.now() + "-" + file.originalname;
+    const fullPath = "images/" + newFileName;
+    ab_callback(null, fullPath);
+  },
+});
+
+//✅ 비디오 폴더
+const s3VideoUploader = multerS3({
+  s3: s3,
+  bucket: "vlog2021v2",
+  acl: "public-read",
+  // bucket 안에 folder 속에 file 분류하기
+  key: function (request, file, ab_callback) {
+    const newFileName = Date.now() + "-" + file.originalname;
+    const fullPath = "videos/" + newFileName;
+    ab_callback(null, fullPath);
+  },
 });
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.siteName = "Vlog";
   res.locals.loggedInUser = req.session.user || {};
+  res.locals.isHeroku = isHeroku; // 👈 local일 때는 url 앞에 /를 추가해 줘야 제대로 작동, 미들웨어에 추가하여 pug에서도 사용
   next();
 };
 
@@ -48,13 +71,15 @@ export const publicOnlyMiddleware = (req, res, next) => {
   }
 };
 
+//local 업로더
 export const avatarUpload = multer({
   dest: "uploads/avatars/",
   limits: {
     fileSize: 3000000,
   },
-  //파일시스템이 아닌 AWS 사용할 거기 때문에 aws-sdk 패키지 다운받아야 함
-  storage: multerUploader,
+  //✅ 저장소: isHeroku인 경우면 AWS에 있는 vlog2021v2/images에 업로드 하기,
+  //👉 아니면(local이면) 특별한 storage 사용하지 않고 업로드 폴더 사용
+  storage: isHeroku ? s3ImageUploader : undefined,
 });
 
 export const videoUpload = multer({
@@ -62,5 +87,7 @@ export const videoUpload = multer({
   limits: {
     fileSize: 30000000,
   },
-  storage: multerUploader,
+  //✅ 저장소: isHeroku인 경우면 AWS에 있는 vlog2021v2/videos에 업로드 하기,
+  //👉 아니면(local이면) 특별한 storage 사용하지 않고 업로드 폴더 사용
+  storage: isHeroku ? s3VideoUploader : undefined,
 });

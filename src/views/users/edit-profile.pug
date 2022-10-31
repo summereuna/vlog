@@ -11,7 +11,7 @@ block content
                     div.avatar
                         i.fas.fa-user
             else
-                img(src=`${loggedInUser.avatarUrl}`, crossorigin).avatar
+                img(src=`${isHeroku ? loggedInUser.avatarUrl : `/${loggedInUser.avatarUrl}`}`, crossorigin).avatar
             section.profile__user-info
                 h1=loggedInUser.name
         article.profile__data

@@ -1,7 +1,7 @@
 .section__form-container {
   padding: 30px;
   background-color: #f1f1f1;
-  min-width: 460px;
+  max-width: 460px;
   display: flex;
   flex-direction: column;
   .section__form-container-title {
@@ -28,12 +28,15 @@
       }
     }
   }
+  a {
+    width: 100%;
+  }
 }
 
 .edit-profile__submit {
   margin-bottom: 20px;
 }
 .edit-profile__password {
-  margin: 20px 0 0 0;
-  width: 400px;
+  margin: 20px 20px 0 20px;
+  width: 100%;
 }

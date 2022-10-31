@@ -5,11 +5,12 @@
   flex-direction: row;
   .video-aside-mixin__thumb {
     margin-right: 8px;
-    width: 168px;
-    height: 94px;
   }
   img {
     width: 100%;
+    width: 168px;
+    height: 94.5px;
+    fill: cover;
   }
   .video-aside-mixin__data {
     margin-bottom: 10px;
@@ -33,5 +34,16 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 1290px) {
+  .video-aside-mixin {
+    flex-direction: column;
+  }
+}
+@media screen and (max-width: 630px) {
+  .video-aside-mixin {
+    display: none;
   }
 }
