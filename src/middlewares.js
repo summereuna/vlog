@@ -8,7 +8,7 @@ console.log("🥺", isHeroku);
 //s3 오브젝트 만들기
 //옵션으로 AWS_ID와 AWS_SECRET 둘 다 옵션으로 전달해야 한다.
 const s3 = new aws.S3({
-  signatureVersion: "v4",
+  signatureVersion: "2023-10-30",
   region: "ap-northeast-2",
   credentials: {
     accessKeyId: process.env.AWS_ID,
@@ -21,7 +21,8 @@ const s3 = new aws.S3({
 const s3ImageUploader = multerS3({
   s3: s3,
   bucket: "vlog2023",
-  acl: "public-read",
+  acl: "private",
+  //acl: "public-read",
   // bucket 안에 folder 속에 file 분류하기
   key: function (request, file, ab_callback) {
     const newFileName = Date.now() + "-" + file.originalname;
@@ -34,7 +35,8 @@ const s3ImageUploader = multerS3({
 const s3VideoUploader = multerS3({
   s3: s3,
   bucket: "vlog2023",
-  acl: "public-read",
+  acl: "private",
+  // acl: "public-read",
   // bucket 안에 folder 속에 file 분류하기
   key: function (request, file, ab_callback) {
     const newFileName = Date.now() + "-" + file.originalname;
