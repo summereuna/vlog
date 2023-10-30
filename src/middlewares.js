@@ -2,7 +2,7 @@ import multer from "multer";
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
 
-//🚀 프로덕션용, 즉 flyio 사용중이면 multer s3 사용 O / 로컬이면 s3 사용 X
+//🚀 프로덕션용, 즉 fly.io 사용중이면 multer s3 사용 O / 로컬이면 s3 사용 X
 const isHeroku = process.env.NODE_ENV === "production";
 console.log("🥺", isHeroku);
 //s3 오브젝트 만들기
