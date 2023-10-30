@@ -4,7 +4,7 @@
 
 ![vlog2021](https://user-images.githubusercontent.com/58466648/154661086-51fc6d3f-0715-4b8b-99e1-b873d2487a58.gif)
 
-👉 https://vlog2021.herokuapp.com/
+👉 https://vlog2021.fly.dev/
 
 ## 👀
 
@@ -19,4 +19,4 @@
 - mongoDB / mongoose
 - pug / SCSS / JavaScript
 - webpack
-- mongoDB Atlas / AWS / Heroku
+- mongoDB Atlas / AWS / Fly.io
