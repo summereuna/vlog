@@ -21,11 +21,6 @@ JavaScript와 Node.js를 배우며 동영상을 녹화/업로드/시청/검색�
 #### 사이트 화면
 ![vlog2021](https://user-images.githubusercontent.com/58466648/154661086-51fc6d3f-0715-4b8b-99e1-b873d2487a58.gif)
 
-#### 테스트 아이디
-| ID | vlogtest |
-| --- | --- |
-| P/W | 123456 |
-
 ### 스킬
 - `Pug` `JavaScript` `SCSS`
 - `Node.js(Express)` `MongoDB(mongoose)` `AWS S3`
