@@ -1,5 +1,5 @@
 {
-  "name": "wetube",
+  "name": "vlog",
   "version": "1.0.0",
   "description": "The best way to watch videos.",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/summereuna/wetube.git"
+    "url": "git+https://github.com/summereuna/vlog.git"
   },
   "scripts": {
     "start": "node build/init.js",
@@ -20,14 +20,14 @@
     "dev:assets": "webpack --mode=development -w"
   },
   "keywords": [
-    "wetube"
+    "vlog"
   ],
   "author": "summereuna",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/summereuna/wetube/issues"
+    "url": "https://github.com/summereuna/vlog/issues"
   },
-  "homepage": "https://github.com/summereuna/wetube#readme",
+  "homepage": "https://github.com/summereuna/vlog#readme",
   "dependencies": {
     "@ffmpeg/core": "^0.10.0",
     "@ffmpeg/ffmpeg": "^0.10.1",

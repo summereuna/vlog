@@ -4,7 +4,7 @@ import aws from "aws-sdk";
 
 //🚀 프로덕션용, 즉 fly.io 사용중이면 multer s3 사용 O / 로컬이면 s3 사용 X
 const isHeroku = process.env.NODE_ENV === "production";
-console.log("🥺", isHeroku);
+console.log("✅ Is Production?", isHeroku);
 //s3 오브젝트 만들기
 //옵션으로 AWS_ID와 AWS_SECRET 둘 다 옵션으로 전달해야 한다.
 const s3 = new aws.S3({
