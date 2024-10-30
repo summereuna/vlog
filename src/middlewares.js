@@ -20,7 +20,7 @@ const s3 = new aws.S3({
 //✅ 이미지 폴더
 const s3ImageUploader = multerS3({
   s3: s3,
-  bucket: "vlog2023",
+  bucket: "vlog2024",
   acl: "public-read",
   // bucket 안에 folder 속에 file 분류하기
   key: function (request, file, ab_callback) {
@@ -33,7 +33,7 @@ const s3ImageUploader = multerS3({
 //✅ 비디오 폴더
 const s3VideoUploader = multerS3({
   s3: s3,
-  bucket: "vlog2023",
+  bucket: "vlog2024",
   acl: "private",
   // acl: "public-read",
   // bucket 안에 folder 속에 file 분류하기
@@ -78,7 +78,7 @@ export const avatarUpload = multer({
   limits: {
     fileSize: 3000000,
   },
-  //✅ 저장소: 인 경우면 AWS에 있는 vlog2023/images에 업로드 하기,
+  //✅ 저장소: 인 경우면 AWS에 있는 vlog2024/images에 업로드 하기,
   //👉 아니면(local이면) 특별한 storage 사용하지 않고 업로드 폴더 사용
   storage: isHeroku ? s3ImageUploader : undefined,
 });
@@ -88,7 +88,7 @@ export const videoUpload = multer({
   limits: {
     fileSize: 30000000,
   },
-  //✅ 저장소: isHeroku인 경우면 AWS에 있는 vlog2023/videos에 업로드 하기,
+  //✅ 저장소: isHeroku인 경우면 AWS에 있는 vlog2024/videos에 업로드 하기,
   //👉 아니면(local이면) 특별한 storage 사용하지 않고 업로드 폴더 사용
   storage: isHeroku ? s3VideoUploader : undefined,
 });
